@@ -1,0 +1,64 @@
+/* Sidebar.module.css */
+.sidebar {
+  background-color: #234e70; /* Adjust color to match your screenshot */
+  color: white;
+  height: 100vh; /* Full height */
+  width: 100%; /* Full width for smaller screens, adjust based on your breakpoint */
+  max-width: 256px; /* Maximum width of the sidebar */
+  padding-top: 1rem; /* Spacing from the top */
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  overflow-y: auto; /* Enable scroll if content is taller than the screen */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for toggling visibility */
+}
+
+.sidebar_header {
+  padding: 1rem 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #396a95; /* Adjust color to match your screenshot */
+}
+
+.sidebar_search {
+  margin-bottom: 1rem;
+  padding: 0 10px;
+  height: 40px;
+}
+
+.search_button {
+  width: 40px;
+}
+
+.nav_link {
+  color: white;
+  transition: color 0.3s ease;
+  font-size: 18px;
+}
+
+.nav_link:hover {
+  color: #f0ad4e; /* Adjust color to match your screenshot */
+  text-decoration: none;
+}
+
+.sidebar_footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #396a95; /* Adjust color to match your screenshot */
+
+}
+
+.icon {
+  margin-right: 8px; /* Space between the icon and the text */
+  vertical-align: -2px; /* Align the icon with the text */
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 256px; /* Sidebar width for medium screens and up */
+  }
+}

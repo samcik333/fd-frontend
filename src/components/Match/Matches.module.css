@@ -1,0 +1,84 @@
+.matchListContainer {
+    display: flex;
+    margin-top: 80px;
+    margin-left: 556px; /* Center the container */
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+.matchCard {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    border-radius: 8px; /* rounded corners */
+    margin-bottom: 1rem; /* space between cards */
+    width: 400px;
+    min-width: 400px;
+  }
+  
+  .matchHeader {
+    background-color: #004d99; /* replace with your primary color */
+    color: #ffffff; /* white text color */
+    font-weight: bold;
+    padding: 0.5rem 1rem; /* top/bottom left/right padding */
+  }
+  
+  .teamCol {
+    text-align: center;
+    padding: 0.5rem; /* padding inside each team column */
+  }
+  
+  .teamLogo {
+    width: 50px; /* Adjust the size as needed */
+    margin-bottom: 0.5rem; /* space below the logo */
+  }
+  
+  .teamName {
+    font-size: 1rem; /* size of the team name */
+    font-weight: bold;
+    color: #333333; /* dark text color */
+    margin-bottom: 0.25rem; /* space below the team name */
+  }
+  
+  .matchDetails {
+    padding: 0.5rem; /* padding around the match details */
+  }
+  
+  .matchStatus {
+    font-size: 0.85rem; /* smaller font size for status */
+    font-weight: bold;
+    color: #ff0000; /* color for live status, for instance */
+    margin-bottom: 0.25rem; /* space below the status */
+  }
+  
+  .matchDate {
+    font-size: 0.75rem; /* smaller font size for the date */
+    color: #666666; /* grey color for the date */
+  }
+  
+  .scoreboard {
+    display: flex; /* use flexbox for layout */
+    justify-content: center; /* center the scoreboard */
+    align-items: center; /* vertically center in the row */
+    font-size: 1.5rem; /* large font size for the score */
+    font-weight: bold;
+    margin-top: 0.5rem; /* space above the scoreboard */
+  }
+  
+  .score {
+    margin: 0 0.5rem; /* space around the score */
+    color: #004d99; /* primary color for the score numbers */
+  }
+  
+  /* You might want to add some responsive behavior */
+  @media (max-width: 768px) {
+    .teamLogo {
+      width: 40px; /* smaller logos on mobile */
+    }
+  
+    .teamName, .matchStatus, .matchDate {
+      font-size: 0.9rem; /* slightly larger text on mobile for readability */
+    }
+  
+    .scoreboard {
+      font-size: 1.2rem; /* smaller score size on mobile */
+    }
+  }

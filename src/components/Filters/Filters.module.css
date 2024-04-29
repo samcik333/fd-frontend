@@ -1,0 +1,12 @@
+.filter_panel {
+    margin-left: 256px;
+    max-width: 300px;
+    height: 100vh;
+    background-color: #fff;
+    padding-top: 1rem; /* Spacing from the top */
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    border-right: 1px solid grey;
+}

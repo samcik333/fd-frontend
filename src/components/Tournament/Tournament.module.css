@@ -1,0 +1,167 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 300px;
+    margin: auto;
+    padding: 20px; /* Added padding for inner spacing */
+}
+  
+.card_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligns the badge to the right */
+    margin-bottom: 20px; /* Adds space between the header and the content */
+}
+  
+.card_header h2 {
+    font-size: 20px;
+    margin: 0; /* Resets any default margin */
+    flex-grow: 1; /* Ensures h2 takes available space, pushing the badge to the right */
+}
+  
+.card_content {
+    text-align: left; /* Aligns content text to the left */
+}
+  
+.badge {
+    width: 100px;
+    height: 90px;
+}
+.tournamentHeader {
+    display: flex;
+}
+
+.logo {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+}
+
+.tournamentName {
+    color: #333; /* This color is an example; adjust as needed */
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.tournamentStatus {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #28a745; /* This color is an example; adjust as needed */
+    color: white;
+    border-radius: 5px;
+    font-size: 14px; /* Adjust size as needed */
+}
+
+.tabs {
+  margin-left: 256px;
+  border-bottom: 1px solid gray;
+}
+
+.tab {
+  padding: 10px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333; /* This color is an example; adjust as needed */
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  border-bottom: 3px solid #000;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: #ddd; /* This color is an example; adjust as needed */
+}
+
+/* Adjust the CSS to remove or reduce the left margin */
+.tournament_list {
+    display: flex;
+    margin-top: 80px;
+    margin-left: 556px; /* Center the container */
+    margin-right: 50px; /* Center the container */
+    margin-bottom: 80px;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* This centers items horizontally within the container */
+    gap: 30px; /* Adjust the space between items */
+  }
+
+
+/* Tournament.module.css */
+
+.tournamentContainer {
+    background-color: #ffffff; /* white background */
+    border-radius: 4px; /* rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    padding: 20px; /* spacing inside the container */
+    margin: 20px; /* spacing outside the container */
+    font-family: 'Arial', sans-serif; /* font style */
+  }
+  
+  .tournamentHeader {
+    color: #333; /* dark grey color for text */
+    margin-left: 500px;
+  }
+  
+  .tournamentDetail {
+    color: #666; /* lighter grey color for text */
+    border-bottom: 1px solid #eee; /* subtle line under each detail */
+    padding-bottom: 10px; /* spacing after each detail */
+    margin-bottom: 10px; /* spacing between detail sections */
+  }
+  
+  .detailLabel {
+    font-weight: bold; /* make label bold */
+  }
+  
+  /* This is for the loading placeholder */
+  .loadingText {
+    text-align: center; /* center the loading text */
+    color: #999; /* grey color for loading text */
+    margin-left: 500px;
+  }
+
+  .resultsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 400px;
+    margin-top: 100px;
+    max-width: 1200px; /* Adjust as needed */
+    padding: 20px;
+    gap: 20px; /* This creates space between the flex items */
+  }
+  
+  .resultsColumn {
+    flex-basis: 48%; /* Adjust the percentage as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align items in the center of the 'column' */
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  /* Responsive adjustments (example for screens smaller than 768px) */
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .resultsContainer {
+    flex-direction: column;
+  }
+  
+  .resultsColumn {
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .resultsColumn:last-child {
+    margin-bottom: 0;
+  }
+}
+  
+
+
+  
