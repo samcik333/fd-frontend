@@ -6,6 +6,7 @@ import { Tournament } from "./Tournament.def"
 import OverviewMatches from "./OverviewMatches"
 import { TournamentProps } from "../Match/Match.def"
 import GroupList from "./Table/GroupList"
+import PlayOff from "./PlayOff/PlayOff"
 
 const Tabs: React.FC = () => {
 
@@ -72,8 +73,8 @@ const Tabs: React.FC = () => {
                 {['Play-off', "Group+Play-off"].includes(tournament?.format || "") && (
                     <Nav.Link
                         href="/tournaments/play-off"
-                        className={`${tour.tab} ${isActive('/tournaments/playoffs') ? 'active' : ''}`}
-                        style={{ borderBottom: isActive('/tournaments/playoffs') ? '3px solid #000' : 'none' }}>
+                        className={`${tour.tab} ${isActive('/tournaments/play-off') ? 'active' : ''}`}
+                        style={{ borderBottom: isActive('/tournaments/play-off') ? '3px solid #000' : 'none' }}>
                         Playoffs
                     </Nav.Link>
                 )}
@@ -85,6 +86,7 @@ const Tabs: React.FC = () => {
             </Nav>
             {isActive('/tournaments/overview') && <OverviewMatches />}
             {isActive('/tournaments/table') && <GroupList />}
+            {isActive('/tournaments/play-off') && <PlayOff />}
         </div >
     )
 }
