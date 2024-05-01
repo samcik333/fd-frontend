@@ -83,7 +83,7 @@ const LatestMatches = () => {
                 <Col lg md={9}>
                     <div className={styles.resultsContainer}>
                         {
-                            latestMatches.length !== 0 &&  
+                            latestMatches.length !== 0 &&
                             <div className={styles.resultsColumn}>
                                 <h3 className={styles.heading}>Latest Results</h3>
                                 <Row className="g-4">
@@ -96,7 +96,7 @@ const LatestMatches = () => {
                             </div>
                         }
                         {
-                            upcomingMatches.length !== 0 &&  
+                            upcomingMatches.length !== 0 &&
                             <div className={styles.resultsColumn}>
                                 <h3 className={styles.heading}>Upcoming Matches</h3>
                                 <Row className="g-4">

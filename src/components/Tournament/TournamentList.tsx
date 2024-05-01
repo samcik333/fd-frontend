@@ -44,7 +44,7 @@ const TournamentList: React.FC = () => {
     }, [])
 
     return (
-        <div style={{backgroundColor: "#F0F2F5", width: "100%"}}>
+        <div style={{ backgroundColor: "#F0F2F5", width: "100%" }}>
             {/* Assuming Filters is a component you've created */}
             <Filters onFilterChange={handleFilterChange} />
             <div className={`${tour.tournament_list}`}>

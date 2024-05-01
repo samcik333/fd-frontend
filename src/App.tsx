@@ -6,27 +6,34 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import MatchList from './components/Match/MatchList'
 import Tabs from './components/Tournament/Tabs'
+import { UserProvider } from './UserContext'
+import MatchDetail from './components/Match/MatchDetail'
 
 function App() {
+
   return (
-    <Router>
-      <div className="App">
-        <Sidebar />
-        <div className='Content'>
-          <Routes>
-            <Route path="/tournaments" element={<TournamentList />} >
-            </Route>
-            <Route path="/tournaments" element={<Tabs />}>
-              <Route path="overview" />
-              <Route path="table" />
-              <Route path="play-off" />
-              <Route path="stats" />
-            </Route>
-            <Route path="/matches" element={<MatchList />} />
-          </Routes>
+    <UserProvider>
+      <Router>
+        <div className="App">
+          <Sidebar />
+          <div className='Content'>
+            <Routes>
+              <Route path="/tournaments" element={<TournamentList />} >
+              </Route>
+              <Route path="/tournaments" element={<Tabs />}>
+                <Route path="overview" />
+                <Route path="table" />
+                <Route path="play-off" />
+                <Route path="stats" />
+              </Route>
+              <Route path="/matches" element={<MatchList />} />
+              <Route path="/matches/match-detail" element={<MatchDetail />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </UserProvider>
+
   )
 }
 

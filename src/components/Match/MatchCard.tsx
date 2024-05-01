@@ -2,14 +2,23 @@ import React from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
 import matchCss from "./Matches.module.css"
 import { MatchProps } from './Match.def'
+import { useNavigate } from 'react-router-dom'
+
 
 const MatchCard: React.FC<{ match: MatchProps, index?: number, matchIndex?: number }> = ({ match, index, matchIndex }) => {
+    const navigate = useNavigate()
+
     const formatDate = (dateString: string | number | Date) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' } as const // This ensures the types are inferred as literals
         return new Date(dateString).toLocaleDateString(undefined, options)
     }
     const handleCardClick = () => {
-
+        try {
+            localStorage.setItem("matchId", match.matchId.toString())
+        } catch (error) {
+            console.error('Failed to save to local storage', error)
+        }
+        navigate(`/matches/match-detail`)
     }
 
     return (
