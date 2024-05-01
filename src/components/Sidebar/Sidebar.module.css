@@ -1,10 +1,11 @@
 /* Sidebar.module.css */
 .sidebar {
-  background-color: #234e70; /* Adjust color to match your screenshot */
+  background-color: #005F73; /* Adjust color to match your screenshot */
   color: white;
   height: 100vh; /* Full height */
   width: 100%; /* Full width for smaller screens, adjust based on your breakpoint */
   max-width: 256px; /* Maximum width of the sidebar */
+  min-width: 256px;
   padding-top: 1rem; /* Spacing from the top */
   position: fixed; /* Fixed position */
   top: 0; /* Align to the top */
@@ -36,6 +37,7 @@
   color: white;
   transition: color 0.3s ease;
   font-size: 18px;
+  text-align: left;
 }
 
 .nav_link:hover {
@@ -44,12 +46,9 @@
 }
 
 .sidebar_footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #396a95; /* Adjust color to match your screenshot */
-
+  border-top: 2px solid #737a81; /* Adjust color to match your screenshot */
 }
 
 .icon {

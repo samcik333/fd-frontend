@@ -12,6 +12,7 @@ const MatchList: React.FC = () => {
     const fetchMatches = async (filters: Record<string, string>) => {
         try {
             const queryParams = new URLSearchParams(filters).toString()
+            console.log(queryParams)
             const response = await fetch(`http://localhost:3000/matches?${queryParams}`)
             if (response.ok) {
                 const data = await response.json()
@@ -30,13 +31,15 @@ const MatchList: React.FC = () => {
         fetchMatches(newFilters)
     }
     return (
-        <div>
+        <div >
             {/* Assuming Filters is a component you've created */}
             <Filters onFilterChange={handleFilterChange} />
-            <div className={`${matchCss.matchListContainer}`}>
-                {matches.map((match, index) => (
-                    <MatchCard key={index} match={match} />
-                ))}
+            <div style={{ marginLeft: '356px', marginTop: '80px' }}>
+                <div className={`${matchCss.matchListContainer}`}>
+                    {matches.map((match, index) => (
+                        <MatchCard key={index} match={match} />
+                    ))}
+                </div>
             </div>
         </div>
     )

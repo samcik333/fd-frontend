@@ -12,17 +12,19 @@ function App() {
     <Router>
       <div className="App">
         <Sidebar />
-        <Routes>
-          <Route path="/tournaments" element={<TournamentList />} >
-          </Route>
-          <Route path="/tournaments" element={<Tabs />}>
-            <Route path="overview" />
-            <Route path="table" />
-            <Route path="play-off" />
-            <Route path="stats" />
-          </Route>
-          <Route path="/matches" element={<MatchList />} />
-        </Routes>
+        <div className='Content'>
+          <Routes>
+            <Route path="/tournaments" element={<TournamentList />} >
+            </Route>
+            <Route path="/tournaments" element={<Tabs />}>
+              <Route path="overview" />
+              <Route path="table" />
+              <Route path="play-off" />
+              <Route path="stats" />
+            </Route>
+            <Route path="/matches" element={<MatchList />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   )

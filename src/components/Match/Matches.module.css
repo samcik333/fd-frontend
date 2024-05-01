@@ -1,7 +1,5 @@
 .matchListContainer {
     display: flex;
-    margin-top: 80px;
-    margin-left: 556px; /* Center the container */
     flex-wrap: wrap;
     gap: 30px;
   }

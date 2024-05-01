@@ -80,28 +80,34 @@ const LatestMatches = () => {
                         <div><strong>Type:</strong> {tournament?.type}</div>
                     </div>
                 </Col>
-                <Col md={9}>
+                <Col lg md={9}>
                     <div className={styles.resultsContainer}>
-                        <div className={styles.resultsColumn}>
-                            <h3 className={styles.heading}>Latest Results</h3>
-                            <Row className="g-4">
-                                {latestMatches.map((match: MatchProps) => (
-                                    <Col key={match.matchId}>
-                                        <MatchCard match={match} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
-                        <div className={styles.resultsColumn}>
-                            <h3 className={styles.heading}>Upcoming Matches</h3>
-                            <Row className="g-4">
-                                {upcomingMatches.map((match: MatchProps) => ( // Assuming you have upcomingMatches
-                                    <Col key={match.matchId}>
-                                        <MatchCard match={match} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
+                        {
+                            latestMatches.length !== 0 &&  
+                            <div className={styles.resultsColumn}>
+                                <h3 className={styles.heading}>Latest Results</h3>
+                                <Row className="g-4">
+                                    {latestMatches.map((match: MatchProps) => (
+                                        <Col key={match.matchId}>
+                                            <MatchCard match={match} />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </div>
+                        }
+                        {
+                            upcomingMatches.length !== 0 &&  
+                            <div className={styles.resultsColumn}>
+                                <h3 className={styles.heading}>Upcoming Matches</h3>
+                                <Row className="g-4">
+                                    {upcomingMatches.map((match: MatchProps) => ( // Assuming you have upcomingMatches
+                                        <Col key={match.matchId}>
+                                            <MatchCard match={match} />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </div>
+                        }
                     </div>
                 </Col>
             </Row>

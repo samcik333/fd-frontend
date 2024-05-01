@@ -1,0 +1,10 @@
+.rounded th,
+.rounded td {
+    height: 55px;
+    border-bottom: 1px solid gray;
+}
+
+.rounded th:first-child {
+  height: 55px;
+  border-bottom: none;
+}

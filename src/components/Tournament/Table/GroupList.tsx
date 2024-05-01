@@ -1,9 +1,10 @@
 // GroupList.tsx
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import { MatchProps, StandingProps } from '../../Match/Match.def'
 import GroupTable from './GroupTable' // Renders a table for a single group
 import MatchCard from '../../Match/MatchCard'
+import matchCss from "../../Match/Matches.module.css"
 
 const GroupList: React.FC = () => {
     const [groupedStandings, setGroupedStandings] = useState<Record<string, StandingProps[]>>({})
@@ -70,7 +71,6 @@ const GroupList: React.FC = () => {
     return (
         <Container>
             <Row>
-                <Col>
                     {Object.entries(groupedStandings).map(([groupName, standings], index) => (
                         <GroupTable
                             key={index}
@@ -78,26 +78,22 @@ const GroupList: React.FC = () => {
                             standings={standings}
                         />
                     ))}
-                </Col>
-                <Col>
                     <div>
-                        <div >
+                        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                             <h3>Schedule</h3>
-                            <Row className="justify-content-center my-3">
-                                <button onClick={goPreviousRound} disabled={currentRoundIndex === 0}>&lt; Prev</button>
-                                <h4>{rounds[currentRoundIndex]}</h4>
-                                <button onClick={goNextRound} disabled={currentRoundIndex === rounds.length - 1}>Next &gt;</button>
-                            </Row>
-                            <Row className="g-4">
-                                {tournamentMatches.map((match: MatchProps) => (
-                                    <Col key={match.matchId}>
-                                        <MatchCard match={match} />
-                                    </Col>
-                                ))}
-                            </Row>
+                                <div style={{display: 'flex', flexDirection: 'row', backgroundColor : '#D9D9D9', width: 'fit-content', marginBottom: '20px'}}>
+                                    <Button variant='link' style={{textDecoration: 'none'}} onClick={goPreviousRound} disabled={currentRoundIndex === 0}>&lt;</Button>
+                                        <h4 style={{display: 'flex', alignSelf: 'center'}}>{rounds[currentRoundIndex]}</h4>
+                                    <Button variant='link' style={{textDecoration: 'none'}} onClick={goNextRound} disabled={currentRoundIndex === rounds.length - 1}>&gt;</Button>
+                                </div>
+                                <div className={`${matchCss.matchListContainer}`}>
+                                    {tournamentMatches.map((match: MatchProps) => (
+                                            <MatchCard match={match} />
+                                    ))}
+                                </div>
+
                         </div>
                     </div>
-                </Col>
             </Row>
 
         </Container>

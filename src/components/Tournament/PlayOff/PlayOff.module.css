@@ -1,53 +1,8 @@
-/* PlayOff.css */
-.tournamentBracket {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.tournamentStage {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.tournamentStageHeader {
-    text-align: center;
-    width: 100%;
-}
-
-.matchColumn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
-}
-
-.matchCardContainer {
-    margin-bottom: 10px;
-}
-
-/* You may need to adjust the lines to fit the size of your MatchCards */
-.matchLine {
-    border-left: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
-    height: 50px;
-    width: 20px;
-    align-self: end;
-}
-
-.matchLine-final {
-    align-self: start;
-}
-
 .bracket {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 40px;
 }
 
 .stage {
@@ -56,44 +11,38 @@
   align-items: center;
 }
 
-.stage:not(:last-child)::after {
-  content: '';
-  display: block;
-  border-top: 2px solid #000;
-  width: 100px;
-  height: 2px;
-  position: relative;
-  top: 50%;
-  right: -50px;
+.matchesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .match {
   position: relative;
-  margin-bottom: 20px;
 }
 
-.match:not(:last-child)::after {
-  content: '';
-  display: block;
-  border-left: 2px solid #000;
-  height: 60px;
-  position: absolute;
-  left: 50%;
-  bottom: -20px;
-}
-
-.finalStage {
-  display: flex;
-  align-items: flex-start;
-}
-
-.finalMatch::before {
-  content: '';
-  display: block;
-  border-top: 2px solid #000;
-  width: 50px;
-  height: 2px;
+.connector {
   position: absolute;
   top: 50%;
-  left: -50px;
+  left: 100%;
+  width: 20px; /* Adjust this value according to your needs */
+  height: 5px; /* Adjust this value according to your needs */
+  background-color: black; /* Adjust this value according to your needs */
+}
+
+.connectorLeft {
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 20px; /* Adjust this value according to your needs */
+  height: 5px; /* Adjust this value according to your needs */
+  background-color: black; /* Adjust this value according to your needs */
+}
+
+.match:nth-child(odd):not(:last-child) .connectorVertical {
+  position: absolute;
+  top: 50%;
+  left: 105%;
+  width: 5px; /* Adjust this value according to your needs */
+  background-color: black; /* Adjust this value according to your needs */
 }

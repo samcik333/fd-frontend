@@ -3,7 +3,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap'
 import matchCss from "./Matches.module.css"
 import { MatchProps } from './Match.def'
 
-const MatchCard: React.FC<{ match: MatchProps }> = ({ match }) => {
+const MatchCard: React.FC<{ match: MatchProps, index?: number, matchIndex?: number }> = ({ match, index, matchIndex }) => {
     const formatDate = (dateString: string | number | Date) => {
         const options = { year: 'numeric', month: 'long', day: 'numeric' } as const // This ensures the types are inferred as literals
         return new Date(dateString).toLocaleDateString(undefined, options)
@@ -11,8 +11,9 @@ const MatchCard: React.FC<{ match: MatchProps }> = ({ match }) => {
     const handleCardClick = () => {
 
     }
+
     return (
-        <Card className={`${matchCss.matchCard}`} onClick={handleCardClick} role="button">
+        <Card className={`${matchCss.matchCard}`} onClick={handleCardClick} role="button" >
             <Card.Header className={`${matchCss.matchHeader}`}>
                 {match.tournament?.name}
             </Card.Header>
