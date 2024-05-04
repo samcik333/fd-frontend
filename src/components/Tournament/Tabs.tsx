@@ -48,6 +48,8 @@ const Tabs: React.FC = () => {
     useEffect(() => {
         fetchTournament()
     }, [])
+
+    console.log(tournament)
     return (
         <div style={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
             <div className={tour.tournamentHeader}>

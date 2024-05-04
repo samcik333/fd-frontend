@@ -1,7 +1,7 @@
-export const arrayMatchData = [
+export const arrayMatchData =[
     {
         "matchId": 1,
-        "datetime": "2024-04-26T20:27:01.278Z",
+        "datetime": "2024-04-29T14:25:47.128Z",
         "location": "Al-Hail Stadium",
         "status": "finished",
         "scoreFirstTeam": 5,
@@ -29,22 +29,6 @@ export const arrayMatchData = [
                 "location": null,
                 "players": [
                     {
-                        "playerId": 6,
-                        "user": {
-                            "userId": 7,
-                            "username": "user6",
-                            "email": "user6@gmail.com",
-                            "password": "pass",
-                            "roles": [
-                                "User",
-                                "player"
-                            ],
-                            "logo": null,
-                            "firstName": "User",
-                            "secondName": "6"
-                        }
-                    },
-                    {
                         "playerId": 2,
                         "user": {
                             "userId": 3,
@@ -59,6 +43,22 @@ export const arrayMatchData = [
                             "logo": null,
                             "firstName": "User",
                             "secondName": "2"
+                        }
+                    },
+                    {
+                        "playerId": 6,
+                        "user": {
+                            "userId": 7,
+                            "username": "user6",
+                            "email": "user6@gmail.com",
+                            "password": "pass",
+                            "roles": [
+                                "User",
+                                "player"
+                            ],
+                            "logo": null,
+                            "firstName": "User",
+                            "secondName": "6"
                         }
                     }
                 ]
@@ -85,6 +85,22 @@ export const arrayMatchData = [
                 "location": null,
                 "players": [
                     {
+                        "playerId": 8,
+                        "user": {
+                            "userId": 9,
+                            "username": "user8",
+                            "email": "user8@gmail.com",
+                            "password": "pass",
+                            "roles": [
+                                "User",
+                                "player"
+                            ],
+                            "logo": null,
+                            "firstName": "User",
+                            "secondName": "8"
+                        }
+                    },
+                    {
                         "playerId": 4,
                         "user": {
                             "userId": 5,
@@ -100,22 +116,6 @@ export const arrayMatchData = [
                             "firstName": "User",
                             "secondName": "4"
                         }
-                    },
-                    {
-                        "playerId": 8,
-                        "user": {
-                            "userId": 9,
-                            "username": "user8",
-                            "email": "user8@gmail.com",
-                            "password": "pass",
-                            "roles": [
-                                "User",
-                                "player"
-                            ],
-                            "logo": null,
-                            "firstName": "User",
-                            "secondName": "8"
-                        }
                     }
                 ]
             }
@@ -123,8 +123,8 @@ export const arrayMatchData = [
         "tournament": {
             "tournamentId": 1,
             "name": "Spain Super cup",
-            "startDate": "2024-04-25T20:27:01.278Z",
-            "endDate": "2024-04-28T20:27:01.278Z",
+            "startDate": "2024-04-28T14:25:47.128Z",
+            "endDate": "2024-05-01T14:25:47.128Z",
             "location": "Saudi Arabia",
             "format": "Play-off",
             "type": "2v2",
@@ -132,6 +132,8 @@ export const arrayMatchData = [
             "numOfTeams": 4,
             "numOfGroups": 0,
             "numOfAdvanced": 0,
+            "numbOfTeamsInGroup": 0,
+            "numberOfPlayOffTeams": 4,
             "logo": null,
             "status": "finished",
             "visibility": "public",
@@ -139,9 +141,10 @@ export const arrayMatchData = [
         },
         "events": [
             {
-                "matchEventId": 1,
-                "time": 30,
+                "matchEventId": 5,
+                "time": 88,
                 "type": "goal",
+                "half": "second",
                 "player": {
                     "playerId": 2,
                     "user": {
@@ -169,13 +172,8 @@ export const arrayMatchData = [
                             "location": null
                         }
                     ]
-                }
-            },
-            {
-                "matchEventId": 2,
-                "time": 30,
-                "type": "assist",
-                "player": {
+                },
+                "assist": {
                     "playerId": 6,
                     "user": {
                         "userId": 7,
@@ -189,154 +187,14 @@ export const arrayMatchData = [
                         "logo": null,
                         "firstName": "User",
                         "secondName": "6"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 3,
-                "time": 45,
-                "type": "goal",
-                "player": {
-                    "playerId": 2,
-                    "user": {
-                        "userId": 3,
-                        "username": "user2",
-                        "email": "user2@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "owner",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "2"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
+                    }
                 }
             },
             {
                 "matchEventId": 4,
-                "time": 45,
-                "type": "assist",
-                "player": {
-                    "playerId": 6,
-                    "user": {
-                        "userId": 7,
-                        "username": "user6",
-                        "email": "user6@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "6"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 5,
-                "time": 50,
-                "type": "goal",
-                "player": {
-                    "playerId": 2,
-                    "user": {
-                        "userId": 3,
-                        "username": "user2",
-                        "email": "user2@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "owner",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "2"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 6,
-                "time": 50,
-                "type": "assist",
-                "player": {
-                    "playerId": 6,
-                    "user": {
-                        "userId": 7,
-                        "username": "user6",
-                        "email": "user6@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "6"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 7,
                 "time": 80,
                 "type": "goal",
+                "half": "second",
                 "player": {
                     "playerId": 2,
                     "user": {
@@ -364,50 +222,185 @@ export const arrayMatchData = [
                             "location": null
                         }
                     ]
+                },
+                "assist": {
+                    "playerId": 6,
+                    "user": {
+                        "userId": 7,
+                        "username": "user6",
+                        "email": "user6@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "6"
+                    }
+                }
+            },
+            {
+                "matchEventId": 3,
+                "time": 50,
+                "type": "goal",
+                "half": "second",
+                "player": {
+                    "playerId": 2,
+                    "user": {
+                        "userId": 3,
+                        "username": "user2",
+                        "email": "user2@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "owner",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "2"
+                    },
+                    "teams": [
+                        {
+                            "teamId": 2,
+                            "name": "Real Madrid",
+                            "logo": null,
+                            "wins": 0,
+                            "draws": 0,
+                            "loses": 0,
+                            "location": null
+                        }
+                    ]
+                },
+                "assist": {
+                    "playerId": 6,
+                    "user": {
+                        "userId": 7,
+                        "username": "user6",
+                        "email": "user6@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "6"
+                    }
+                }
+            },
+            {
+                "matchEventId": 2,
+                "time": 45,
+                "type": "goal",
+                "half": "first",
+                "player": {
+                    "playerId": 2,
+                    "user": {
+                        "userId": 3,
+                        "username": "user2",
+                        "email": "user2@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "owner",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "2"
+                    },
+                    "teams": [
+                        {
+                            "teamId": 2,
+                            "name": "Real Madrid",
+                            "logo": null,
+                            "wins": 0,
+                            "draws": 0,
+                            "loses": 0,
+                            "location": null
+                        }
+                    ]
+                },
+                "assist": {
+                    "playerId": 6,
+                    "user": {
+                        "userId": 7,
+                        "username": "user6",
+                        "email": "user6@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "6"
+                    }
+                }
+            },
+            {
+                "matchEventId": 1,
+                "time": 30,
+                "type": "goal",
+                "half": "first",
+                "player": {
+                    "playerId": 2,
+                    "user": {
+                        "userId": 3,
+                        "username": "user2",
+                        "email": "user2@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "owner",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "2"
+                    },
+                    "teams": [
+                        {
+                            "teamId": 2,
+                            "name": "Real Madrid",
+                            "logo": null,
+                            "wins": 0,
+                            "draws": 0,
+                            "loses": 0,
+                            "location": null
+                        }
+                    ]
+                },
+                "assist": {
+                    "playerId": 6,
+                    "user": {
+                        "userId": 7,
+                        "username": "user6",
+                        "email": "user6@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "6"
+                    }
                 }
             },
             {
                 "matchEventId": 8,
-                "time": 80,
-                "type": "assist",
-                "player": {
-                    "playerId": 6,
-                    "user": {
-                        "userId": 7,
-                        "username": "user6",
-                        "email": "user6@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "6"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 9,
-                "time": 88,
+                "time": 84,
                 "type": "goal",
+                "half": "second",
                 "player": {
-                    "playerId": 2,
+                    "playerId": 4,
                     "user": {
-                        "userId": 3,
-                        "username": "user2",
-                        "email": "user2@gmail.com",
+                        "userId": 5,
+                        "username": "user4",
+                        "email": "user4@gmail.com",
                         "password": "pass",
                         "roles": [
                             "User",
@@ -416,12 +409,12 @@ export const arrayMatchData = [
                         ],
                         "logo": null,
                         "firstName": "User",
-                        "secondName": "2"
+                        "secondName": "4"
                     },
                     "teams": [
                         {
-                            "teamId": 2,
-                            "name": "Real Madrid",
+                            "teamId": 4,
+                            "name": "Atl Madrid",
                             "logo": null,
                             "wins": 0,
                             "draws": 0,
@@ -429,77 +422,129 @@ export const arrayMatchData = [
                             "location": null
                         }
                     ]
+                },
+                "assist": {
+                    "playerId": 8,
+                    "user": {
+                        "userId": 9,
+                        "username": "user8",
+                        "email": "user8@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "8"
+                    }
+                }
+            },
+            {
+                "matchEventId": 7,
+                "time": 75,
+                "type": "goal",
+                "half": "second",
+                "player": {
+                    "playerId": 4,
+                    "user": {
+                        "userId": 5,
+                        "username": "user4",
+                        "email": "user4@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "owner",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "4"
+                    },
+                    "teams": [
+                        {
+                            "teamId": 4,
+                            "name": "Atl Madrid",
+                            "logo": null,
+                            "wins": 0,
+                            "draws": 0,
+                            "loses": 0,
+                            "location": null
+                        }
+                    ]
+                },
+                "assist": {
+                    "playerId": 8,
+                    "user": {
+                        "userId": 9,
+                        "username": "user8",
+                        "email": "user8@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "8"
+                    }
+                }
+            },
+            {
+                "matchEventId": 6,
+                "time": 33,
+                "type": "goal",
+                "half": "first",
+                "player": {
+                    "playerId": 4,
+                    "user": {
+                        "userId": 5,
+                        "username": "user4",
+                        "email": "user4@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "owner",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "4"
+                    },
+                    "teams": [
+                        {
+                            "teamId": 4,
+                            "name": "Atl Madrid",
+                            "logo": null,
+                            "wins": 0,
+                            "draws": 0,
+                            "loses": 0,
+                            "location": null
+                        }
+                    ]
+                },
+                "assist": {
+                    "playerId": 8,
+                    "user": {
+                        "userId": 9,
+                        "username": "user8",
+                        "email": "user8@gmail.com",
+                        "password": "pass",
+                        "roles": [
+                            "User",
+                            "player"
+                        ],
+                        "logo": null,
+                        "firstName": "User",
+                        "secondName": "8"
+                    }
                 }
             },
             {
                 "matchEventId": 10,
-                "time": 88,
-                "type": "assist",
-                "player": {
-                    "playerId": 6,
-                    "user": {
-                        "userId": 7,
-                        "username": "user6",
-                        "email": "user6@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "6"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 2,
-                            "name": "Real Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 11,
-                "time": 33,
-                "type": "goal",
-                "player": {
-                    "playerId": 4,
-                    "user": {
-                        "userId": 5,
-                        "username": "user4",
-                        "email": "user4@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "owner",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "4"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 12,
-                "time": 33,
-                "type": "assist",
+                "time": 92,
+                "type": "yellowCard",
+                "half": "second",
                 "player": {
                     "playerId": 8,
                     "user": {
@@ -526,142 +571,14 @@ export const arrayMatchData = [
                             "location": null
                         }
                     ]
-                }
+                },
+                "assist": null
             },
             {
-                "matchEventId": 13,
-                "time": 75,
-                "type": "goal",
-                "player": {
-                    "playerId": 4,
-                    "user": {
-                        "userId": 5,
-                        "username": "user4",
-                        "email": "user4@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "owner",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "4"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 14,
-                "time": 75,
-                "type": "assist",
-                "player": {
-                    "playerId": 8,
-                    "user": {
-                        "userId": 9,
-                        "username": "user8",
-                        "email": "user8@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "8"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 15,
-                "time": 84,
-                "type": "goal",
-                "player": {
-                    "playerId": 4,
-                    "user": {
-                        "userId": 5,
-                        "username": "user4",
-                        "email": "user4@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "owner",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "4"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 16,
-                "time": 84,
-                "type": "assist",
-                "player": {
-                    "playerId": 8,
-                    "user": {
-                        "userId": 9,
-                        "username": "user8",
-                        "email": "user8@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "8"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
-            },
-            {
-                "matchEventId": 17,
+                "matchEventId": 9,
                 "time": 35,
                 "type": "yellowCard",
+                "half": "first",
                 "player": {
                     "playerId": 2,
                     "user": {
@@ -689,39 +606,8 @@ export const arrayMatchData = [
                             "location": null
                         }
                     ]
-                }
-            },
-            {
-                "matchEventId": 18,
-                "time": 92,
-                "type": "yellowCard",
-                "player": {
-                    "playerId": 8,
-                    "user": {
-                        "userId": 9,
-                        "username": "user8",
-                        "email": "user8@gmail.com",
-                        "password": "pass",
-                        "roles": [
-                            "User",
-                            "player"
-                        ],
-                        "logo": null,
-                        "firstName": "User",
-                        "secondName": "8"
-                    },
-                    "teams": [
-                        {
-                            "teamId": 4,
-                            "name": "Atl Madrid",
-                            "logo": null,
-                            "wins": 0,
-                            "draws": 0,
-                            "loses": 0,
-                            "location": null
-                        }
-                    ]
-                }
+                },
+                "assist": null
             }
         ]
     }

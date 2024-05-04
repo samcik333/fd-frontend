@@ -37,6 +37,7 @@ export const CreateTournamentModel: React.FC<TournamentFormProps> = ({ onSuccess
         onSuccessfullCreate() // Assuming you want to call this after successful creation
     }
 
+    //TODO prepisat
     const createTournaments = async () => {
         const endpoint = "http://localhost:3000/tournaments/create"
         let tournamentData: Partial<Tournament> = {}

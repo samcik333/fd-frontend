@@ -1,14 +1,9 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react'
-
-interface User {
-  id: number
-  username: string
-  // Add more properties as needed
-}
+import { UserProps } from './components/Match/Match.def'
 
 interface UserContextType {
-  user: User[] | null | undefined
-  loginUser: (userData: User[]) => void
+  user: UserProps[] | null | undefined
+  loginUser: (userData: UserProps[]) => void
   logoutUser: () => void
 }
 
@@ -27,9 +22,9 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User[] | null | undefined>(undefined)
+  const [user, setUser] = useState<UserProps[] | null | undefined>(undefined)
 
-  const loginUser = (userData: User[]) => {
+  const loginUser = (userData: UserProps[]) => {
     setUser(userData)
     localStorage.setItem("user", JSON.stringify(userData))
   }

@@ -7,7 +7,7 @@ import { RegisterForm } from '../Auth/Register'
 import { LoginForm } from '../Auth/Login'
 import { useUser } from '../../UserContext'
 import { CreateTournamentModel } from '../Tournament/CreateTournamentModel'
-
+import { CreateTeamModal } from '../Team/CreateTeamModal'
 const Sidebar = () => {
     const [showModal, setShowModal] = useState(false)
     const [isLogin, setIsLogin] = useState(true)
@@ -15,6 +15,7 @@ const Sidebar = () => {
     const isActive = (path: string) => location.pathname.includes(path)
     const { logoutUser } = useUser()
     const [showCreateTournamentModal, setShowCreateTournamentModal] = useState(false)
+    const [showCreateTeamModal, setShowCreateTeamModal] = useState(false)
 
     const { user } = useUser()
 
@@ -36,6 +37,14 @@ const Sidebar = () => {
 
     const handleTournamentModalClose = () => {
         setShowCreateTournamentModal(false)
+    }
+
+    const handleTeamModalOpen = () => {
+        setShowCreateTeamModal(true)
+    }
+
+    const handleTeamModalClose = () => {
+        setShowCreateTeamModal(false)
     }
 
     return (
@@ -71,6 +80,10 @@ const Sidebar = () => {
                         <Nav.Link onClick={handleTournamentModalOpen} className={styles.nav_link} style={{ color: 'white' }}>
                             <Icon.TrophyFill className={styles.icon} />
                             Create Tournament
+                        </Nav.Link>
+                        <Nav.Link onClick={handleTeamModalOpen} className={styles.nav_link} style={{ color: 'white' }}>
+                            <Icon.TrophyFill className={styles.icon} />
+                            Create Team
                         </Nav.Link>
 
                     </>
@@ -108,6 +121,17 @@ const Sidebar = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <CreateTournamentModel onSuccessfullCreate={handleTournamentModalClose} />
+                </Modal.Body>
+                <Modal.Footer>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showCreateTeamModal} onHide={handleTeamModalOpen} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create Team</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateTeamModal onSuccessfullCreate={handleTeamModalClose} />
                 </Modal.Body>
                 <Modal.Footer>
                 </Modal.Footer>

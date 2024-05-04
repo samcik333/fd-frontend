@@ -34,7 +34,6 @@ const Stats: React.FC = () => {
 
     const createStatsArray = (stat: ScorerProps): Stat[] => {
         return [
-            { name: 'Saka', stat: stat.player.teams., value: stat.goals },
         ]
     }
 

@@ -14,7 +14,7 @@ const TournamentCard: React.FC<{ tournament: TournamentProps }> = ({ tournament 
         } catch (error) {
             console.error('Failed to save to local storage', error)
         }
-        navigate(`overview`)
+        navigate(`/tournaments/overview`)
     }
     return (
         <div className={`${tour.card}`} onClick={handleCardClick} role="button">
