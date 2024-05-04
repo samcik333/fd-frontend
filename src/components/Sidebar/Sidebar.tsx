@@ -6,12 +6,15 @@ import { useLocation } from "react-router-dom"
 import { RegisterForm } from '../Auth/Register'
 import { LoginForm } from '../Auth/Login'
 import { useUser } from '../../UserContext'
+import { CreateTournamentModel } from '../Tournament/CreateTournamentModel'
 
 const Sidebar = () => {
     const [showModal, setShowModal] = useState(false)
     const [isLogin, setIsLogin] = useState(true)
     const location = useLocation()
     const isActive = (path: string) => location.pathname.includes(path)
+    const { logoutUser } = useUser()
+    const [showCreateTournamentModal, setShowCreateTournamentModal] = useState(false)
 
     const { user } = useUser()
 
@@ -25,6 +28,14 @@ const Sidebar = () => {
 
     const handleModalOpen = () => {
         setShowModal(true)
+    }
+
+    const handleTournamentModalOpen = () => {
+        setShowCreateTournamentModal(true)
+    }
+
+    const handleTournamentModalClose = () => {
+        setShowCreateTournamentModal(false)
     }
 
     return (
@@ -57,29 +68,25 @@ const Sidebar = () => {
                             <Icon.TrophyFill className={styles.icon} />
                             My Tournaments
                         </Nav.Link>
-
-                        <Nav.Link href='/myTeams' className={styles.nav_link} style={{ color: isActive("/myTeams") ? '#EE9B00' : 'white' }}>
-                            <Icon.PeopleFill className={styles.icon} />  {/* Assuming PeopleFill icon represents a team */}
-                            My Teams
-                        </Nav.Link>
-
-                        <Nav.Link href='/myMatches' className={styles.nav_link} style={{ color: isActive("/myMatches") ? '#EE9B00' : 'white' }}>
-                            <Icon.CalendarEventFill className={styles.icon} />  {/* CalendarEventFill can indicate scheduled matches */}
-                            My Matches
-                        </Nav.Link>
-
-                        <Nav.Link href='/createTournament' className={styles.nav_link} style={{ color: isActive("/createTournament") ? '#EE9B00' : 'white' }}>
-                            <Icon.PlusCircleFill className={styles.icon} />  {/* PlusCircleFill for creating new items */}
+                        <Nav.Link onClick={handleTournamentModalOpen} className={styles.nav_link} style={{ color: 'white' }}>
+                            <Icon.TrophyFill className={styles.icon} />
                             Create Tournament
                         </Nav.Link>
 
-                        <Nav.Link href='/createTeam' className={styles.nav_link} style={{ color: isActive("/createTeam") ? '#EE9B00' : 'white' }}>
-                            <Icon.PlusSquareFill className={styles.icon} />  {/* PlusSquareFill for creating new teams */}
-                            Create Team
-                        </Nav.Link>
                     </>
                 )}
             </Nav>
+            {user === null && (
+                <div className={styles.sidebar_footer}>
+                    <Button variant="link" style={{ color: 'white', float: 'left', textDecoration: 'none' }} onClick={handleModalOpen}>Log in</Button>
+                </div>
+            )}
+            {user !== null && (
+                <div className={styles.sidebar_footer}>
+                    <Button variant="link" style={{ color: 'white', float: 'right', textDecoration: 'none', backgroundColor: "red" }} onClick={logoutUser}>Log Out</Button>
+                    <span style={{ color: 'white', float: 'left', marginTop: "5px" }}>{user ? user[0].username : ""}</span>
+                </div>
+            )}
 
             <Modal show={showModal} onHide={handleModalClose} centered>
                 <Modal.Header closeButton>
@@ -92,6 +99,17 @@ const Sidebar = () => {
                     <Button variant="secondary" onClick={toggleForm}>
                         Switch to {isLogin ? "Register" : "Login"}
                     </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showCreateTournamentModal} onHide={handleTournamentModalClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create Tournament</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateTournamentModel onSuccessfullCreate={handleTournamentModalClose} />
+                </Modal.Body>
+                <Modal.Footer>
                 </Modal.Footer>
             </Modal>
         </div>

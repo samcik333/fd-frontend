@@ -1,63 +1,83 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import TournamentCard from './TournamentCard'
 import Filters from '../Filters/Filters'
 import tour from "./Tournament.module.css"
 import { TournamentProps } from '../Match/Match.def'
+import { useLocation } from 'react-router-dom'
+import { useUser } from '../../UserContext'
+
+interface Filters {
+    [key: string]: string
+}
 
 const TournamentList: React.FC = () => {
+    const today = new Date().toISOString().split('T')[0] // Get today's date in YYYY-MM-DD format
     const [tournaments, setTournaments] = useState<TournamentProps[]>([])
-    const [filters, setFilters] = useState<Record<string, string>>({})
+    const [filters, setFilters] = useState<Filters>({ date: today }) // Initialize filters with today's date
+    const isMounted = useRef(false)
+    const location = useLocation()
+    const { user } = useUser()
 
-    const fetchTournaments = async (filters: Record<string, string>) => {
+    useEffect(() => {
+        if (isMounted.current) {
+
+            if (location.pathname.includes("/myTournaments")) {
+                fetchMyTournaments(filters)
+            }
+            else {
+                fetchTournaments(filters)
+            }
+        } else {
+            isMounted.current = true
+        }
+    }, [filters]) // Dependency array includes filters
+
+    const fetchTournaments = async (filters: Filters) => {
+        const queryParams = new URLSearchParams(filters).toString()
         try {
-            const queryParams = new URLSearchParams(filters).toString()
             const response = await fetch(`http://localhost:3000/tournaments?${queryParams}`)
             if (response.ok) {
                 const data = await response.json()
-                setTournaments(data) // Update the tournaments state with the fetched data
+                setTournaments(data)
             } else {
-                throw new Error('Network response was not ok.')
+                throw new Error('Failed to fetch tournaments.')
             }
         } catch (error) {
             console.error("Error fetching tournaments:", error)
-            // Set error state here if you have one
         }
     }
 
+    const fetchMyTournaments = async (filters: Filters) => {
+        const queryParams = new URLSearchParams(filters).toString()
+        try {
+            const response = await fetch(`http://localhost:3000/tournaments/own?${queryParams}`, { credentials: "include" })
+            if (response.ok) {
+                const data = await response.json()
+                setTournaments(data)
+            } else {
+                throw new Error('Failed to fetch tournaments.')
+            }
+        } catch (error) {
+            console.error("Error fetching tournaments:", error)
+        }
+    }
 
-    // Call this function whenever filters change
     const handleFilterChange = (filterName: string, value: string) => {
-        const newFilters = { ...filters, [filterName]: value }
-        setFilters(newFilters)
-        fetchTournaments(newFilters)
+        setFilters(prevFilters => ({ ...prevFilters, [filterName]: value }))
     }
-
-    // Load more tournaments
-    const loadMoreTournaments = () => {
-        // Here you would increase some pagination counter and fetch more items
-    }
-
-    useEffect(() => {
-        const today = new Date().toISOString().split('T')[0]
-        setFilters({ ...filters, date: today })
-        fetchTournaments({})
-    }, [])
 
     return (
-        <div style={{ backgroundColor: "#F0F2F5", width: "100%" }}>
-            {/* Assuming Filters is a component you've created */}
+        <div className="bg-light" style={{ width: "100%" }}>
             <Filters onFilterChange={handleFilterChange} />
-            <div className={`${tour.tournament_list}`}>
-                {tournaments.map((tournament, index) => (
-                    <TournamentCard
-                        key={index}
-                        tournament={tournament}
-                    />
-                ))}
+            <div style={{ marginLeft: '356px', marginTop: '80px' }}>
+                <div className={tour.tournament_list}>
+                    {tournaments.map((tournament, index) => (
+                        <TournamentCard key={index} tournament={tournament} />
+                    ))}
+                </div>
             </div>
         </div>
     )
 }
 
 export default TournamentList
-

@@ -7,8 +7,8 @@ interface User {
 }
 
 interface UserContextType {
-  user: User | null | undefined
-  loginUser: (userData: User) => void
+  user: User[] | null | undefined
+  loginUser: (userData: User[]) => void
   logoutUser: () => void
 }
 
@@ -27,9 +27,9 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null | undefined>(undefined)
+  const [user, setUser] = useState<User[] | null | undefined>(undefined)
 
-  const loginUser = (userData: User) => {
+  const loginUser = (userData: User[]) => {
     setUser(userData)
     localStorage.setItem("user", JSON.stringify(userData))
   }

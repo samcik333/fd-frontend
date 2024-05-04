@@ -17,13 +17,14 @@ const PlayOff: React.FC = () => {
             const response = await fetch(`http://localhost:3000/tournaments/${tournamentId}/matches`)
             if (response.ok) {
                 const matches: MatchProps[] = await response.json()
-                // Group matches by type
                 const groupedByType = matches.reduce((acc: Record<string, MatchProps[]>, match: MatchProps) => {
                     const { type } = match
-                    if (!acc[type]) {
-                        acc[type] = []
+                    if (type.includes('final')) {  // Only group matches containing 'final' in their type
+                        if (!acc[type]) {
+                            acc[type] = []
+                        }
+                        acc[type].push(match)
                     }
-                    acc[type].push(match)
                     return acc
                 }, {})
                 setMatchesByType(groupedByType)

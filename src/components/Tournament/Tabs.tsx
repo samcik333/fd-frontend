@@ -7,6 +7,8 @@ import OverviewMatches from "./OverviewMatches"
 import { TournamentProps } from "../Match/Match.def"
 import GroupList from "./Table/GroupList"
 import PlayOff from "./PlayOff/PlayOff"
+import Teams from "./Teams/Teams"
+import Stats from "./Stats/Stats"
 
 const Tabs: React.FC = () => {
 
@@ -83,10 +85,17 @@ const Tabs: React.FC = () => {
                     style={{ borderBottom: isActive('/tournaments/stats') ? '3px solid #000' : 'none', color: 'black' }}>
                     Statistics
                 </Nav.Link>
+                <Nav.Link href="/tournaments/teams"
+                    className={`${tour.tab} ${isActive('/tournaments/teams') ? 'active' : ''}`}
+                    style={{ borderBottom: isActive('/tournaments/teams') ? '3px solid #000' : 'none', color: 'black' }}>
+                    Teams
+                </Nav.Link>
             </Nav>
             {isActive('/tournaments/overview') && <OverviewMatches />}
             {isActive('/tournaments/table') && <GroupList />}
             {isActive('/tournaments/play-off') && <PlayOff />}
+            {isActive('/tournaments/teams') && <Teams avalibleTeams={tournament?.numOfTeams} organizerId={tournament?.organizer} />}
+            {isActive('/tournaments/stats') && <Stats />}
         </div >
     )
 }

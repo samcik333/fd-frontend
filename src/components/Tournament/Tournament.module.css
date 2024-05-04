@@ -84,13 +84,8 @@ background-color: #ddd; /* This color is an example; adjust as needed */
 /* Adjust the CSS to remove or reduce the left margin */
 .tournament_list {
   display: flex;
-  margin-top: 80px;
-  margin-left: 556px; /* Center the container */
-  margin-right: 50px; /* Center the container */
-  margin-bottom: 80px;
   flex-wrap: wrap;
-  justify-content: flex-start; /* This centers items horizontally within the container */
-  gap: 30px; /* Adjust the space between items */
+  gap: 30px;
 }
 
 

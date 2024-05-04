@@ -1,38 +1,44 @@
-import React, { useState } from 'react'
-import Filters from '../Filters/Filters'
+import React, { useEffect, useState } from 'react'
+import Filters from '../Filters/MatchFilters'
 import matchCss from "./Matches.module.css"
 import MatchCard from './MatchCard'
 import { MatchProps } from './Match.def'
 
+interface Filters {
+    [key: string]: string
+}
 
 const MatchList: React.FC = () => {
+    const today = new Date().toISOString().split('T')[0]
     const [matches, setMatches] = useState<MatchProps[]>([])
-    const [filters, setFilters] = useState<Record<string, string>>({})
+    const [filters, setFilters] = useState<Filters>({ date: today })
 
-    const fetchMatches = async (filters: Record<string, string>) => {
+    useEffect(() => {
+        fetchMatches(filters)
+    }, [filters])
+
+    const fetchMatches = async (filters: Filters) => {
+        const queryParams = new URLSearchParams(filters).toString()
+
         try {
-            const queryParams = new URLSearchParams(filters).toString()
-            console.log(queryParams)
             const response = await fetch(`http://localhost:3000/matches?${queryParams}`)
             if (response.ok) {
                 const data = await response.json()
-                setMatches(data) // Update the tournaments state with the fetched data
+                setMatches(data)
             } else {
                 throw new Error('Network response was not ok.')
             }
         } catch (error) {
-            console.error("Error fetching tournaments:", error)
-            // Set error state here if you have one
+            console.error("Error fetching matches:", error)
         }
     }
+
     const handleFilterChange = (filterName: string, value: string) => {
-        const newFilters = { ...filters, [filterName]: value }
-        setFilters(newFilters)
-        fetchMatches(newFilters)
+        setFilters(prevFilters => ({ ...prevFilters, [filterName]: value }))
     }
+
     return (
-        <div >
-            {/* Assuming Filters is a component you've created */}
+        <div className="bg-light" style={{ width: "100%" }}>
             <Filters onFilterChange={handleFilterChange} />
             <div style={{ marginLeft: '356px', marginTop: '80px' }}>
                 <div className={`${matchCss.matchListContainer}`}>

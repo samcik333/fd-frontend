@@ -1,6 +1,6 @@
-import React from "react";
-import { Col, Image, Row } from "react-bootstrap";
-import { arrayMatchData } from "./mockArray";
+import React from "react"
+import { Col, Image, Row } from "react-bootstrap"
+import { arrayMatchData } from "./mockArray"
 
 const MatchDetailHeader: React.FC = () => {
   return (
@@ -53,10 +53,10 @@ const MatchDetailHeader: React.FC = () => {
               </Row>
             </div>
           </div>
-        );
+        )
       })}
     </>
-  );
-};
+  )
+}
 
-export default MatchDetailHeader;
+export default MatchDetailHeader

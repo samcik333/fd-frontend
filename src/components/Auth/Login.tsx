@@ -41,7 +41,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccessfulLogin }) => {
         try {
             const response = await fetch(`http://localhost:3000/me`, { credentials: "include" })
             if (response.ok) {
-                const data = await response.json()// Update the tournaments state with the fetched data
+                const data = await response.json()
+                // Update the tournaments state with the fetched data
                 loginUser(data)
             } else {
                 throw new Error('Network response was not ok.')
