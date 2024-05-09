@@ -1,46 +1,43 @@
 import React, { useEffect, useState, useRef } from "react";
-import TournamentCard from "./TournamentCard";
-import TournamentFilters from "../Filters/Filters";
-import tour from "./Tournament.module.css";
-import { TournamentProps } from "../Match/Match.def";
+import { TeamProps } from "../Match/Match.def";
 import { useLocation } from "react-router-dom";
-import { useUser } from "../../UserContext";
+import TeamsFilters from "../Filters/TeamsFilters";
+import TeamCard from "./TeamCard";
+import tour from "../Tournament/Tournament.module.css";
 
 interface Filters {
   [key: string]: string;
 }
 
-const TournamentList: React.FC<{setRerender:React.Dispatch<React.SetStateAction<boolean>>;rerender: boolean}> = ({
+const TeamsList: React.FC<{setRerender:React.Dispatch<React.SetStateAction<boolean>>;rerender: boolean}> = ({
   setRerender,rerender
 }) => {
-  const [tournaments, setTournaments] = useState<TournamentProps[]>([]);
-  const [filters, setFilters] = useState<Filters>({}); // Initialize filters with today's date
+  const [teams, setTeams] = useState<TeamProps[]>([]);
+  const [filters, setFilters] = useState<Filters>({});
   const isMounted = useRef(false);
   const location = useLocation();
-  const { user } = useUser();
 
   useEffect(() => {
     if (isMounted.current) {
-      if (location.pathname.includes("/myTournaments")) {
-        fetchMyTournaments(filters);
+      if (location.pathname.includes("/myTeams")) {
+        fetchMyTeams(filters);
       } else {
-        fetchTournaments(filters);
+        fetchTeams(filters);
       }
     } else {
       isMounted.current = true;
     }
-  }, [filters, rerender]); // Dependency array includes filters
+  }, [filters,rerender]); 
 
-  const fetchTournaments = async (filters: Filters) => {
+  const fetchTeams = async (filters: Filters) => {
     const queryParams = new URLSearchParams(filters).toString();
     try {
       const response = await fetch(
-        `http://localhost:3000/tournaments?${queryParams}`,
-        { credentials: "include" },
+        `http://localhost:3000/teams?${queryParams}`,
       );
       if (response.ok) {
         const data = await response.json();
-        setTournaments(data);
+        setTeams(data);
       } else {
         throw new Error("Failed to fetch tournaments.");
       }
@@ -49,16 +46,16 @@ const TournamentList: React.FC<{setRerender:React.Dispatch<React.SetStateAction<
     }
   };
 
-  const fetchMyTournaments = async (filters: Filters) => {
+  const fetchMyTeams = async (filters: Filters) => {
     const queryParams = new URLSearchParams(filters).toString();
     try {
       const response = await fetch(
-        `http://localhost:3000/tournaments/own?${queryParams}`,
+        `http://localhost:3000/teams/my?${queryParams}`,
         { credentials: "include" },
       );
       if (response.ok) {
         const data = await response.json();
-        setTournaments(data);
+        setTeams(data);
       } else {
         throw new Error("Failed to fetch tournaments.");
       }
@@ -73,11 +70,11 @@ const TournamentList: React.FC<{setRerender:React.Dispatch<React.SetStateAction<
 
   return (
     <div className="bg-light" style={{ width: "100%" }}>
-      <TournamentFilters onFilterChange={handleFilterChange} />
+      <TeamsFilters onFilterChange={handleFilterChange} />
       <div style={{ marginLeft: "356px", marginTop: "80px" }}>
         <div className={tour.tournament_list}>
-          {tournaments.map((tournament, index) => (
-            <TournamentCard key={index} tournament={tournament} />
+          {teams.map((team) => (
+            <TeamCard team={team} />
           ))}
         </div>
       </div>
@@ -85,4 +82,4 @@ const TournamentList: React.FC<{setRerender:React.Dispatch<React.SetStateAction<
   );
 };
 
-export default TournamentList;
+export default TeamsList;

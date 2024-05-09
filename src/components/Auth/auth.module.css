@@ -1,0 +1,11 @@
+.login_form {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Roboto", sans-serif;
+}
+
+.input_control {
+  margin-bottom: 20px;
+}

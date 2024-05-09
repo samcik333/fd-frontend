@@ -1,6 +1,6 @@
 /* Sidebar.module.css */
 .sidebar {
-  background-color: #005F73; /* Adjust color to match your screenshot */
+  background-color: rgba(0, 95, 115, 0.9); /* Semi-transparent */
   color: white;
   height: 100vh; /* Full height */
   width: 100%; /* Full width for smaller screens, adjust based on your breakpoint */
@@ -11,16 +11,16 @@
   top: 0; /* Align to the top */
   left: 0; /* Align to the left */
   overflow-y: auto; /* Enable scroll if content is taller than the screen */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for toggling visibility */
+  font-family: "Roboto", sans-serif; /* Smooth transition for toggling visibility */
 }
 
 .sidebar_header {
   padding: 1rem 1.5rem;
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #396a95; /* Adjust color to match your screenshot */
+  border-bottom: 1px solid rgba(57, 106, 149, 0.5); /* Adjust color to match your screenshot */
 }
 
 .sidebar_search {
@@ -34,21 +34,24 @@
 }
 
 .nav_link {
-  color: white;
-  transition: color 0.3s ease;
-  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+  font-size: 16px;
   text-align: left;
 }
 
 .nav_link:hover {
   color: #f0ad4e; /* Adjust color to match your screenshot */
   text-decoration: none;
+  transform: scale(1.05);
 }
 
 .sidebar_footer {
   width: 100%;
   padding: 1rem 1.5rem;
-  border-top: 2px solid #737a81; /* Adjust color to match your screenshot */
+  border-top: 2px solid rgba(115, 122, 129, 0.5); /* Adjust color to match your screenshot */
 }
 
 .icon {

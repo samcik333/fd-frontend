@@ -1,11 +1,18 @@
 .filter_panel {
-    max-width: 300px;
-    height: 100vh;
-    background-color: #fff;
-    padding-top: 1rem; /* Spacing from the top */
-    position: fixed; /* Fixed position */
-    top: 0; /* Align to the top */
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out;
-    border-right: 1px solid grey;
+  max-width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 2rem 1rem; /* Spacing from the top */
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top */
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+  border-right: 2px solid #d1d5db;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter_panel span {
+  font-weight: bold;
+  font-size: 24px;
 }

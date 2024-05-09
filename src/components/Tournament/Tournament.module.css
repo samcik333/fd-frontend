@@ -1,36 +1,8 @@
-.card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  width: 300px;
-  margin: auto;
-  padding: 20px; /* Added padding for inner spacing */
-}
-
-.card_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Aligns the badge to the right */
-  margin-bottom: 20px; /* Adds space between the header and the content */
-}
-
-.card_header h2 {
-  font-size: 20px;
-  margin: 0; /* Resets any default margin */
-  flex-grow: 1; /* Ensures h2 takes available space, pushing the badge to the right */
-}
-
-.card_content {
-  text-align: left; /* Aligns content text to the left */
-}
-
-.badge {
-  width: 100px;
-  height: 90px;
-}
 .tournamentHeader {
   display: flex;
+  color: #333;
+  flex-direction: row;
+  align-items: center;
 }
 
 .logo {
@@ -39,11 +11,11 @@
 }
 
 .tournamentInfo {
-margin-top: 30px;
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .tournamentName {
   color: #333; /* This color is an example; adjust as needed */
@@ -61,24 +33,24 @@ align-items: flex-start;
 }
 
 .tabs {
-border-bottom: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 
 .tab {
-padding: 10px;
-margin: 0 5px;
-text-decoration: none;
-color: #333; /* This color is an example; adjust as needed */
-transition: all 0.3s ease;
+  padding: 10px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #333; /* This color is an example; adjust as needed */
+  transition: all 0.3s ease;
 }
 
 .tab.active {
-border-bottom: 3px solid #000;
-font-weight: bold;
+  border-bottom: 3px solid #000;
+  font-weight: bold;
 }
 
 .tab:hover {
-background-color: #ddd; /* This color is an example; adjust as needed */
+  background-color: #ddd; /* This color is an example; adjust as needed */
 }
 
 /* Adjust the CSS to remove or reduce the left margin */
@@ -88,7 +60,6 @@ background-color: #ddd; /* This color is an example; adjust as needed */
   gap: 30px;
 }
 
-
 /* Tournament.module.css */
 
 .tournamentContainer {
@@ -97,11 +68,7 @@ background-color: #ddd; /* This color is an example; adjust as needed */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
   padding: 20px; /* spacing inside the container */
   margin: 20px; /* spacing outside the container */
-  font-family: 'Arial', sans-serif; /* font style */
-}
-
-.tournamentHeader {
-  color: #333; /* dark grey color for text */
+  font-family: "Arial", sans-serif; /* font style */
 }
 
 .tournamentDetail {
@@ -142,17 +109,132 @@ background-color: #ddd; /* This color is an example; adjust as needed */
 
 /* Responsive adjustments (example for screens smaller than 768px) */
 /* Responsive adjustments */
-@media (max-width: 1200px) {  
-.resultsContainer {
+@media (max-width: 1200px) {
+  .resultsContainer {
+    flex-direction: column;
+  }
+
+  .resultsColumn {
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .resultsColumn:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.formGroupFormat {
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+  display: flex;
   flex-direction: column;
 }
 
-.resultsColumn {
-  flex-basis: 100%;
-  margin-bottom: 1rem;
+.radioWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.resultsColumn:last-child {
-  margin-bottom: 0;
+.formCheck {
+  margin-bottom: 10px; /* Space between radio buttons */
 }
+
+.form_group {
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.form_label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cardCustom {
+  width: 18rem;
+  margin: 2rem auto;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+.cardCustom:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader {
+  background-color: rgba(
+    0,
+    95,
+    115,
+    0.9
+  ) !important; /* Adding !important to ensure override */
+  color: white !important;
+}
+
+.cardImage {
+  width: 100px; /* Určuje šírku obrázku */
+  height: 100px; /* Určuje výšku obrázku, rovnakú ako šírku pre kruhový tvar */
+  border-radius: 50%; /* Vytvára kruhový tvar */
+  object-fit: cover; /* Zabezpečí, že obrázok bude správne pokryť určenú oblasť bez deformácie */
+  border: 3px solid white; /* Pridá biely rámik okolo obrázku pre lepšie oddelenie od pozadia */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Pridáva mierne stieň pre trojrozmerný efekt */
+}
+
+.cardBody {
+  background-color: white; /* Light gray background */
+}
+
+.cardText {
+  color: #343a40; /* Dark gray text */
+}
+
+.tournamentCard {
+  background-color: #fff; /* White background for the card */
+  border: 1px solid rgba(0, 0, 0, 0.125); /* Light grey border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-top: 50px;
+}
+
+.tournamentInfo {
+  font-size: 16px; /* Adjust font size as needed */
+  color: #333; /* Dark grey color for text for readability */
+}
+
+.tournamentName {
+  font-size: 24px; /* Large font size for better visibility */
+  font-weight: bold;
+}
+
+.tournamentStatus {
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: white; /* White text color */
+  font-weight: bold;
+}
+
+.finished {
+  background-color: green; /* Green background for 'Finished' */
+}
+
+.ongoing {
+  background-color: red; /* Red background for 'Ongoing' */
+}
+
+.upcoming {
+  background-color: grey; /* Grey background for 'Upcoming' */
+}
+
+.tabs .nav-link {
+  color: black; /* Black color for all tabs */
+  padding: 10px;
+  font-size: 16px;
+}
+
+.nav-link.active {
+  font-weight: bold; /* Bold font for active tab */
 }

@@ -1,37 +1,30 @@
 import React from "react";
-import { PlayerProps } from "./Match.def";
-import { arrayMatchData } from "./mockArray";
+import { MatchProps, PlayerProps } from "./Match.def";
 import MatchPlayersCard from "./MatchPlayersCard";
 import MatchDetailEvents from "./MatchDetailEvents";
-const MatchDetailCards: React.FC = () => {
+const MatchDetailCards: React.FC<{ isOverTime: boolean,matchData: MatchProps }> = ({
+  isOverTime,matchData,
+}) => {
   return (
     <>
-      {arrayMatchData.map((data) => {
-        return (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "100%",
-              justifyContent: "space-between",
-            }}
-          >
-            <MatchPlayersCard
-              players={
-                data.matchStatFirstTeam.team.players as unknown as PlayerProps[]
-              }
-              teamName={data.matchStatFirstTeam.team.name}
-            />
-            <MatchDetailEvents />
-            <MatchPlayersCard
-              players={
-                data.matchStatFirstTeam.team.players as unknown as PlayerProps[]
-              }
-              teamName={data.matchStatSecondTeam.team.name}
-            />
-          </div>
-        );
-      })}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "calc(100%-256px)",
+          justifyContent: "space-between",
+        }}
+      >
+        <MatchPlayersCard
+          players={matchData.firstTeam.players}
+          teamName={matchData.firstTeam.name}
+        />
+        <MatchDetailEvents matchData={matchData} isOverTime={isOverTime} />
+        <MatchPlayersCard
+          players={matchData.secondTeam.players}
+          teamName={matchData.secondTeam.name}
+        />
+      </div>
     </>
   );
 };

@@ -1,17 +1,12 @@
-
 import React, { useEffect, useState } from "react";
-import { ListGroup, Button, Container } from "react-bootstrap";
-import { PlusCircle, Trash } from "react-bootstrap-icons";
+import { Button, Container } from "react-bootstrap";
 import { GroupProps, TeamProps, TournamentProps } from "../../Match/Match.def";
 import { useUser } from "../../../UserContext";
-import Players from "../Teams/Players";
-import { useToast } from "../../../ToastContext";
 import styles from "./PlayOff.module.css";
 import MatchCard from "../../Match/MatchCard";
-import { group } from "console";
-import { useParams } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-const PlayOff: React.FC<{
+const PlayOffTeams: React.FC<{
   tournament: TournamentProps;
   setTournament: React.Dispatch<
     React.SetStateAction<TournamentProps | undefined>
@@ -19,6 +14,7 @@ const PlayOff: React.FC<{
 }> = ({ tournament, setTournament }) => {
   const [teamsToShow, setTeamsToShow] = useState<TeamProps[]>([]);
   const { user } = useUser();
+  const navigate = useNavigate();
   const [isOrganizer, setIsOrganizer] = useState<boolean>(false);
   const [canBeStarted, setCanBeStarted] = useState<boolean>(false);
   const [playoffBracket, setPlayoffBracket] = useState<{
@@ -50,7 +46,7 @@ const PlayOff: React.FC<{
   }, []);
 
   useEffect(() => {
-    setCanBeStarted(tournament.groups.filter(group=>group.colIndex===0).every((g) => g.homeTeam && g.awayTeam));
+    setCanBeStarted(tournament.groups.filter(g => g.colIndex === 0).every((g) => g.homeTeam && g.awayTeam));
   }, [tournament]);
 
   const fetchTeamsToShow = async () => {
@@ -74,6 +70,95 @@ const PlayOff: React.FC<{
       console.error("Error fetching teams:", error);
     }
   };
+  
+  const startTournament = async () => {
+    try {
+      const endpoint = `http://localhost:3000/tournaments/${tournament.tournamentId}/startTournament`;
+
+      const options = {
+        method: "POST",
+        credentials: "include",
+      } as RequestInit;
+      const response = await fetch(endpoint, options);
+
+      if (response.ok) {
+        const data = await response.json();
+        setTournament(data);
+        navigate(`/tournaments/play-offs/${tournament.tournamentId}`);
+      } else {
+        throw new Error("Failed to fetch teams.");
+      }
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
+  };
+
+  const addTeam = async (teamId: number,groupId:number, homeAwayTeamIndex:number) => {
+    try {
+      const endpoint = `http://localhost:3000/tournaments/${tournament.tournamentId}/teams/${teamId}`;
+
+      const options = {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          groupId: groupId,
+          homeAwayTeamIndex: homeAwayTeamIndex,
+        }),
+      } as RequestInit;
+      const response = await fetch(endpoint, options);
+
+      if (response.ok) {
+        const data = await response.json();
+        setTournament(data);
+        setTeamsToShow((prev) => prev.filter((t) => t.teamId !== teamId));
+      } else {
+        throw new Error("Failed to fetch teams.");
+      }
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
+  };
+
+  const deleteTeam = async (teamId: number, groupId: number,homeAwayTeamIndex:number) => {
+    try {
+      const endpoint = `http://localhost:3000/tournaments/${tournament.tournamentId}/teams/${teamId}`;
+
+      const options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          groupId: groupId,
+          homeAwayTeamIndex: homeAwayTeamIndex,
+        }),
+      } as RequestInit;
+      const response = await fetch(endpoint, options);
+
+      if (response.ok) {
+        const data = await response.json();
+        setTournament(data);
+      } else {
+        throw new Error("Failed to fetch teams.");
+      }
+    } catch (error) {
+      console.error("Error fetching teams:", error);
+    }
+  };
+
+  const handleTeamClick = (teamId: number, groupId: number,homeAwayTeamIndex:number) => {
+    deleteTeam(teamId, groupId, homeAwayTeamIndex);
+  };
+
+  const handleTeamAddClick = (teamId: number, groupId:number, homeAwayTeamIndex:number) => {
+    addTeam(teamId,groupId,homeAwayTeamIndex);
+  };
+
+  console.log(playoffBracket);
 
   return (
     <div className="container mt-3">
@@ -97,7 +182,7 @@ const PlayOff: React.FC<{
                         rowGap: index === 1 ? index * 175 : index * 270,
                       }}
                     >
-                      {group.map((oneGroup, matchIndex) => (
+                      {group.map((match, matchIndex) => (
                         <div
                           className={`${styles.match} ${isFinalStage ? styles.finalMatch : ""}`}
                         >
@@ -123,9 +208,12 @@ const PlayOff: React.FC<{
                           {index !== 0 && (
                             <div className={styles.connectorLeft}></div>
                           )}
-
                           <MatchCard
-                            group={oneGroup}
+                          isToOrganize={true}
+                          handleTeamAddClick= {handleTeamAddClick}
+                            handleTeamClick={handleTeamClick}
+                            group={match}
+                            teamsToShow = {teamsToShow}
                             index={index + 1}
                             matchIndex={matchIndex + 1}
                           />
@@ -139,8 +227,14 @@ const PlayOff: React.FC<{
           </div>
         </Container>
       </>
+
+      {canBeStarted && (
+        <div>
+          <Button onClick={() => startTournament()}>Start tournament</Button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default PlayOff;
+export default PlayOffTeams;

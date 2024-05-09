@@ -1,35 +1,54 @@
-import React from 'react'
-import tour from "./Tournament.module.css"
-import { useNavigate } from 'react-router-dom'
-import { TournamentProps } from '../Match/Match.def'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { TournamentProps } from "../Match/Match.def";
+import Card from "react-bootstrap/Card";
+import styles from "./Tournament.module.css";
+import { SERVER_URL } from "../../App"; // Import the styles
 
+const TournamentCard: React.FC<{ tournament: TournamentProps }> = ({
+  tournament,
+}) => {
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    navigate(`/tournaments/overview/${tournament.tournamentId}`);
+  };
 
-const TournamentCard: React.FC<{ tournament: TournamentProps }> = ({ tournament }) => {
+  return (
+    <Card
+      className={`${styles.cardCustom}`}
+      onClick={handleCardClick}
+      role="button"
+    >
+      <Card.Header
+        className={`d-flex justify-content-between align-items-center ${styles.cardHeader}`}
+      >
+        <Card.Title>{tournament.name}</Card.Title>
+        <img
+          src={
+            tournament.logo
+              ? `${SERVER_URL}${tournament.logo}`
+              : "https://img.freepik.com/premium-vector/tournament-sports-league-logo-emblem_1366-201.jpg"
+          }
+          alt="Tournament Badge"
+          className={`${styles.cardImage}`}
+        />
+      </Card.Header>
+      <Card.Body className={`${styles.cardBody}`}>
+        <Card.Text className={`${styles.cardText}`}>
+          <strong>Type:</strong> {tournament.format}
+        </Card.Text>
+        <Card.Text className={`${styles.cardText}`}>
+          <strong>Current Stage:</strong> {tournament.stage}
+        </Card.Text>
+        <Card.Text className={`${styles.cardText}`}>
+          <strong>Teams:</strong> {tournament.numOfTeams ?? tournament.numberOfPlayOffTeams}
+        </Card.Text>
+        <Card.Text className={`${styles.cardText}`}>
+          <strong>Location:</strong> {tournament.location}
+        </Card.Text>
+      </Card.Body>
+    </Card>
+  );
+};
 
-    const navigate = useNavigate()
-    const handleCardClick = () => {
-        // Define what happens when the card is clicked.
-        try {
-            localStorage.setItem("tournamentId", tournament.tournamentId.toString())
-        } catch (error) {
-            console.error('Failed to save to local storage', error)
-        }
-        navigate(`/tournaments/overview`)
-    }
-    return (
-        <div className={`${tour.card}`} onClick={handleCardClick} role="button">
-            <header className={`${tour.card_header}`}>
-                <h2>{tournament.name}</h2>
-                <img src="https://img.freepik.com/premium-vector/tournament-sports-league-logo-emblem_1366-201.jpg" alt="Tournament Badge" className={`${tour.badge}`} />
-            </header>
-            <div className={`${tour.card_content}`}>
-                <p><strong>Type:</strong> {tournament.format}</p>
-                <p><strong>Current Stage:</strong> {tournament.stage}</p>
-                <p><strong>Teams:</strong> {tournament.numOfTeams}</p>
-                <p><strong>Location:</strong> {tournament.location}</p>
-            </div>
-        </div>
-    )
-}
-
-export default TournamentCard
+export default TournamentCard;

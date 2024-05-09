@@ -72,7 +72,9 @@
     width: 40px; /* smaller logos on mobile */
   }
 
-  .teamName, .matchStatus, .matchDate {
+  .teamName,
+  .matchStatus,
+  .matchDate {
     font-size: 0.9rem; /* slightly larger text on mobile for readability */
   }
 
