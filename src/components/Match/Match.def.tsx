@@ -5,7 +5,7 @@ import {
 
 export interface TournamentProps {
   tournamentId: number
-  organizer: UserProps // You might want to use a simpler UserProps type for nested interfaces
+  organizer: UserProps
   name?: string
   startDate: Date
   endDate: Date
@@ -41,7 +41,7 @@ export interface TournamentProps {
 
 export interface TeamProps {
   teamId: number
-  owner: UserProps // Again, consider a UserProps type for simplicity
+  owner: UserProps
   name: string
   logo?: string
   wins: number
@@ -85,7 +85,7 @@ export interface ScorerProps {
 
 export interface MatchCardsProps {
   matchId: number
-  datetime: string // Format as needed for display
+  datetime: string
   location?: string
   status:
   | "finished"
@@ -97,8 +97,8 @@ export interface MatchCardsProps {
   | "secondExtraTime"
   | "halfExtraTime"
   | "penalty"
-  firstTeam: TeamProps // Detailed team info, assuming TeamProps is well defined
-  secondTeam: TeamProps // Similarly detailed team info
+  firstTeam: TeamProps
+  secondTeam: TeamProps
   scoreFirstTeam?: number
   scoreSecondTeam?: number
   type: string
@@ -123,8 +123,8 @@ export interface UserProps {
   logo?: string
   firstName: string
   secondName: string
-  teams: TeamProps[] // Assuming type Team[] is correctly imported and defined elsewhere
-  tournaments: TournamentProps[] // Assuming type Tournament[] is correctly imported and defined elsewhere
+  teams: TeamProps[]
+  tournaments: TournamentProps[]
 }
 
 export interface PlayerProps {
@@ -179,17 +179,17 @@ export interface MatchProps {
 
 export interface MatchEventProps {
   matchEventId: number
-  player?: PlayerProps // Consider using a simpler PlayerProps type if needed for nested interfaces
+  player?: PlayerProps
   assist?: PlayerProps
-  match: MatchProps // Consider using a simpler MatchProps type if nested interfaces are complex
-  time: string // Note: Originally noted as Date type for simplicity, but kept as number to match your description
+  match: MatchProps
+  time: string
   type: MatchEventType
-  status: MatchStatus // TODO type better as upcoming ....
+  status: MatchStatus
 }
 
 export interface MatchStatProps {
   matchStatId: number
-  team: TeamProps // Consider using a simpler TeamProps type for nested interfaces
+  team: TeamProps
   totalShots: number
   shotsOnGoal: number
   saves: number

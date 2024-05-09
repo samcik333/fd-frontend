@@ -1,86 +1,85 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
-import MatchCard from "../Match/MatchCard";
-import { MatchProps, TournamentProps } from "../Match/Match.def";
-import styles from "./Tournament.module.css";
+import React, { useState, useEffect, useRef } from "react"
+import { Card, Col, Container, Row } from "react-bootstrap"
+import MatchCard from "../Match/MatchCard"
+import { MatchProps, TournamentProps } from "../Match/Match.def"
+import styles from "./Tournament.module.css"
 
 const OverviewMatches: React.FC<{
-  tournament: TournamentProps;
+  tournament: TournamentProps
   setTournament: React.Dispatch<
     React.SetStateAction<TournamentProps | undefined>
-  >;
+  >
 }> = ({ tournament, setTournament }) => {
-  const [latestMatches, setLatestMatches] = useState<MatchProps[]>([]);
-  const [upcomingMatches, setUpcomingMatches] = useState<MatchProps[]>([]);
-  const isMounted = useRef(false); // useRef to track initial mount
+  const [latestMatches, setLatestMatches] = useState<MatchProps[]>([])
+  const [upcomingMatches, setUpcomingMatches] = useState<MatchProps[]>([])
+  const isMounted = useRef(false)
 
   const formatDate = (dateString: string | number | Date) => {
-    const options = { year: "numeric", month: "long", day: "numeric" } as const; // This ensures the types are inferred as literals
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
+    const options = { year: "numeric", month: "long", day: "numeric" } as const
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
 
   useEffect(() => {
     if (!isMounted.current) {
-      isMounted.current = true; // Set to true on first mount
-      fetchLatestMatches();
-      fetchUpcomingMatches();
-      fetchTournament();
+      isMounted.current = true
+      fetchLatestMatches()
+      fetchUpcomingMatches()
+      fetchTournament()
     }
-    // No dependencies array means this effect runs only once on mount
-  }, []);
+  }, [])
 
   const fetchLatestMatches = async () => {
     try {
       const response = await fetch(
         `http://localhost:3000/tournaments/${tournament?.tournamentId}/matches/results`,
         { credentials: "include" },
-      );
+      )
       if (response.ok) {
-        const matches = await response.json();
-        setLatestMatches(matches);
+        const matches = await response.json()
+        setLatestMatches(matches)
       } else {
-        throw new Error("Failed to fetch latest matches");
+        throw new Error("Failed to fetch latest matches")
       }
     } catch (error) {
-      console.error("Error fetching latest matches:", error);
+      console.error("Error fetching latest matches:", error)
     }
-  };
+  }
 
   const fetchUpcomingMatches = async () => {
     try {
       const response = await fetch(
         `http://localhost:3000/tournaments/${tournament.tournamentId}/matches/upcoming`,
         { credentials: "include" },
-      );
+      )
       if (response.ok) {
-        const upcoming = await response.json();
-        setUpcomingMatches(upcoming);
+        const upcoming = await response.json()
+        setUpcomingMatches(upcoming)
       } else {
-        throw new Error("Failed to fetch upcoming matches");
+        throw new Error("Failed to fetch upcoming matches")
       }
     } catch (error) {
-      console.error("Error fetching upcoming matches:", error);
+      console.error("Error fetching upcoming matches:", error)
     }
-  };
+  }
 
   const fetchTournament = async () => {
     try {
       const response = await fetch(
         `http://localhost:3000/tournaments/${tournament.tournamentId}`,
-      );
+      )
       if (response.ok) {
-        const tournament = await response.json();
-        setTournament(tournament[0]);
+        const tournament = await response.json()
+        setTournament(tournament[0])
       } else {
-        throw new Error("Failed to fetch tournament details");
+        throw new Error("Failed to fetch tournament details")
       }
     } catch (error) {
-      console.error("Error fetching tournament details:", error);
+      console.error("Error fetching tournament details:", error)
     }
-  };
+  }
 
   if (!latestMatches) {
-    return null; // or some placeholder
+    return null // or some placeholder
   }
 
   return (
@@ -140,7 +139,7 @@ const OverviewMatches: React.FC<{
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default OverviewMatches;
+export default OverviewMatches

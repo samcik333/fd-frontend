@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { ListGroup, Button, Modal } from "react-bootstrap";
-import { Trash } from "react-bootstrap-icons";
-import { PlayerProps } from "../../Match/Match.def";
-import { CreatePlayerModal } from "../../Player/CreatePlayerModal";
+import React, { useState, useEffect } from "react"
+import { ListGroup, Button, Modal } from "react-bootstrap"
+import { Trash } from "react-bootstrap-icons"
+import { PlayerProps } from "../../Match/Match.def"
+import { CreatePlayerModal } from "../../Player/CreatePlayerModal"
 
 const Players: React.FC<{
-  teamId: number;
-  teamName: string;
-  isOrganizer: boolean;
+  teamId: number
+  teamName: string
+  isOrganizer: boolean
 }> = ({ teamId, teamName, isOrganizer }) => {
-  const [players, setPlayers] = useState<PlayerProps[]>([]);
-  const [showCreatePlayerModal, setShowCreatePlayerModal] = useState(false);
+  const [players, setPlayers] = useState<PlayerProps[]>([])
+  const [showCreatePlayerModal, setShowCreatePlayerModal] = useState(false)
 
   useEffect(() => {
-    fetchPlayers();
-  }, [teamId]); // Rerun when teamId changes
+    fetchPlayers()
+  }, [teamId])
 
   const fetchPlayers = async () => {
     try {
       const response = await fetch(
         `http://localhost:3000/tournaments/teams/${teamId}/players`,
         { credentials: "include" },
-      );
+      )
       if (response.ok) {
-        const data = await response.json();
-        setPlayers(data);
+        const data = await response.json()
+        setPlayers(data)
       } else {
-        throw new Error("Failed to fetch players.");
+        throw new Error("Failed to fetch players.")
       }
     } catch (error) {
-      console.error("Error fetching players:", error);
+      console.error("Error fetching players:", error)
     }
-  };
+  }
 
   const handlePlayerModalOpen = () => {
-    setShowCreatePlayerModal(true);
-  };
+    setShowCreatePlayerModal(true)
+  }
 
   const handlePlayerModalClose = () => {
-    setShowCreatePlayerModal(false);
-  };
+    setShowCreatePlayerModal(false)
+  }
   return (
     <div>
       <h3>{teamName}</h3>
@@ -82,7 +82,7 @@ const Players: React.FC<{
         <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default Players;
+export default Players

@@ -1,40 +1,40 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Button, Modal } from "react-bootstrap";
-import { useEffect } from "react";
-import { TeamProps } from "../Match/Match.def";
-import MatchPlayersCard from "../Match/MatchPlayersCard";
-import { AddPlayerModal } from "./AddPlayerModal";
+import React, { useState } from "react"
+import { useParams } from "react-router-dom"
+import { Button, Modal } from "react-bootstrap"
+import { useEffect } from "react"
+import { TeamProps } from "../Match/Match.def"
+import MatchPlayersCard from "../Match/MatchPlayersCard"
+import { AddPlayerModal } from "./AddPlayerModal"
 const TeamDetail: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams()
 
-  const [team, setTeam] = useState<TeamProps | undefined>(undefined);
-  const [showAddPlayerModal, setShowAddPlayerModal] = useState<boolean>(false);
+  const [team, setTeam] = useState<TeamProps | undefined>(undefined)
+  const [showAddPlayerModal, setShowAddPlayerModal] = useState<boolean>(false)
   useEffect(() => {
-    fetchTeamDetail();
-  }, [showAddPlayerModal]); // Dependency array includes filters
+    fetchTeamDetail()
+  }, [showAddPlayerModal])
 
   const fetchTeamDetail = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/teams/${id}`);
+      const response = await fetch(`http://localhost:3000/teams/${id}`)
       if (response.ok) {
-        const data = await response.json();
-        setTeam(data);
+        const data = await response.json()
+        setTeam(data)
       } else {
-        throw new Error("Failed to fetch teams.");
+        throw new Error("Failed to fetch teams.")
       }
     } catch (error) {
-      console.error("Error fetching teams:", error);
+      console.error("Error fetching teams:", error)
     }
-  };
+  }
 
   const handlePlayerModalOpen = () => {
-    setShowAddPlayerModal(true);
-  };
+    setShowAddPlayerModal(true)
+  }
 
   const handlePlayerModalClose = () => {
-    setShowAddPlayerModal(false);
-  };
+    setShowAddPlayerModal(false)
+  }
 
   return (
     <div style={{ margin: "20px" }}>
@@ -59,7 +59,7 @@ const TeamDetail: React.FC = () => {
         <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default TeamDetail;
+export default TeamDetail

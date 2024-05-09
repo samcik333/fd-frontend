@@ -1,140 +1,135 @@
-import React, { useState } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
-import { useToast } from "../../ToastContext";
-import styles from "./Tournament.module.css";
+import React, { useState } from "react"
+import { Alert, Button, Form } from "react-bootstrap"
+import { useToast } from "../../ToastContext"
+import styles from "./Tournament.module.css"
 
-// Define prop types for LoginForm
 type TournamentFormProps = {
-  onSuccessfullCreate: () => void;
-};
+  onSuccessfullCreate: () => void
+}
 
 interface FormErrors {
-  name?: string;
-  startDate?: string;
-  endDate?: string;
-  numTeams?: string;
-  numGroups?: string;
-  numOfAdvanced?: string;
+  name?: string
+  startDate?: string
+  endDate?: string
+  numTeams?: string
+  numGroups?: string
+  numOfAdvanced?: string
 }
 
 export const CreateTournamentModel: React.FC<TournamentFormProps> = ({
   onSuccessfullCreate,
 }) => {
-  const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [location, setLocation] = useState("");
-  const [logo, setLogo] = useState(null);
-  const [format, setFormat] = useState("Group");
-  const [type, setType] = useState("11v11");
-  const [numGroups, setNumGroups] = useState("1");
-  const [numTeams, setNumTeams] = useState("2");
-  const [numOfAdvanced, setNumOfAdvanced] = useState("1");
-  const [numOfPlayOffTeams, setNumOfPlayOffTeams] = useState("2");
-  const [errors, setErrors] = useState<FormErrors>({});
-  const { triggerToast } = useToast();
+  const [name, setName] = useState("")
+  const [startDate, setStartDate] = useState("")
+  const [endDate, setEndDate] = useState("")
+  const [location, setLocation] = useState("")
+  const [logo, setLogo] = useState(null)
+  const [format, setFormat] = useState("Group")
+  const [type, setType] = useState("11v11")
+  const [numGroups, setNumGroups] = useState("1")
+  const [numTeams, setNumTeams] = useState("2")
+  const [numOfAdvanced, setNumOfAdvanced] = useState("1")
+  const [numOfPlayOffTeams, setNumOfPlayOffTeams] = useState("2")
+  const [errors, setErrors] = useState<FormErrors>({})
+  const { triggerToast } = useToast()
 
   const handleChange = (format: string) => {
-    setFormat(format); // Set format to 'groups'
-  };
+    setFormat(format)
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     if (Object.keys(errors).length > 0) {
-      // If there are errors, display a toast message and prevent form submission
-      triggerToast("Please fix errors before submitting.", "warning");
-      return; // Stop the form submission
-    } // Prevent the default form submission
-    await createTournaments(); // Call your function to handle the API request
-    onSuccessfullCreate(); // Assuming you want to call this after successful creation
-  };
+      triggerToast("Please fix errors before submitting.", "warning")
+      return
+    }
+    await createTournaments()
+    onSuccessfullCreate()
+  }
 
   const handleStartDateChange = (date: string) => {
-    setStartDate(date);
-    const today = new Date().toISOString().split("T")[0];
+    setStartDate(date)
+    const today = new Date().toISOString().split("T")[0]
     if (date < today) {
       setErrors((prev) => ({
         ...prev,
         startDate: "Start date cannot be in the past.",
-      }));
+      }))
     } else if (endDate && date >= endDate) {
       setErrors((prev) => ({
         ...prev,
         startDate: "Start date must be before end date.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.startDate;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.startDate
+      setErrors(newErrors)
     }
-  };
+  }
 
   const handleEndDateChange = (date: string) => {
-    setEndDate(date);
+    setEndDate(date)
     if (startDate && date < startDate) {
       setErrors((prev) => ({
         ...prev,
         endDate: "End date must be after start date.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.endDate;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.endDate
+      setErrors(newErrors)
     }
-  };
+  }
 
   const handleNumTeamsChange = (num: string) => {
-    setNumTeams(num);
-    const numVal = parseInt(num, 10);
+    setNumTeams(num)
+    const numVal = parseInt(num, 10)
     if (numVal < 2 || numVal % 2 !== 0) {
       setErrors((prev) => ({
         ...prev,
         numTeams: "Number of teams must be even and at least 2.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.numTeams;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.numTeams
+      setErrors(newErrors)
     }
-  };
+  }
 
   const handleNumGroupsChange = (num: string) => {
-    setNumGroups(num);
-    const numGroupsInt = parseInt(num, 10);
-    const numTeamsInt = parseInt(numTeams, 10);
+    setNumGroups(num)
+    const numGroupsInt = parseInt(num, 10)
+    const numTeamsInt = parseInt(numTeams, 10)
 
-    // Check if numTeams divided by numGroups is an integer and at least 2
     if (numTeamsInt % numGroupsInt !== 0 || numTeamsInt / numGroupsInt < 2) {
       setErrors((prev) => ({
         ...prev,
         numGroups: "Teams per group must be a whole number and at least 2.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.numGroups;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.numGroups
+      setErrors(newErrors)
     }
-  };
+  }
 
   const handleAdvancedNumOfTeamsChange = (num: string) => {
-    setNumOfAdvanced(num);
-    const advancedTeams = parseInt(num, 10);
-    const numGroupsInt = parseInt(numGroups, 10);
-    const numTeamsInt = parseInt(numTeams, 10);
+    setNumOfAdvanced(num)
+    const advancedTeams = parseInt(num, 10)
+    const numGroupsInt = parseInt(numGroups, 10)
+    const numTeamsInt = parseInt(numTeams, 10)
 
-    // Minimum advanced teams is 1
     if (isNaN(advancedTeams) || advancedTeams < 1) {
       setErrors((prev) => ({
         ...prev,
         numOfAdvanced: "Number of advanced teams must be at least 1.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.numOfAdvanced;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.numOfAdvanced
+      setErrors(newErrors)
     }
 
-    // Maximum advanced teams should not exceed numOfTeams / numOfGroups
     if (
       !isNaN(advancedTeams) &&
       !isNaN(numGroupsInt) &&
@@ -144,68 +139,66 @@ export const CreateTournamentModel: React.FC<TournamentFormProps> = ({
         ...prev,
         numOfAdvanced:
           "Number of advanced teams exceeds maximum allowed per group.",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.numOfAdvanced;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.numOfAdvanced
+      setErrors(newErrors)
     }
 
-    // Advanced teams * numOfGroups should be a power of 2
-    const product = advancedTeams * numGroupsInt;
-    const playOffsTeams = [2, 4, 8, 16, 32];
+    const product = advancedTeams * numGroupsInt
+    const playOffsTeams = [2, 4, 8, 16, 32]
     if (!playOffsTeams.includes(product) || product > numTeamsInt) {
       setErrors((prev) => ({
         ...prev,
         numOfAdvanced:
           "Product of advanced teams and number of groups must be a power of 2 (2, 4, 8, ...).",
-      }));
+      }))
     } else {
-      const newErrors = { ...errors };
-      delete newErrors.numOfAdvanced;
-      setErrors(newErrors);
+      const newErrors = { ...errors }
+      delete newErrors.numOfAdvanced
+      setErrors(newErrors)
     }
-  };
+  }
 
-  //TODO prepisat
   const createTournaments = async () => {
-    const endpoint = "http://localhost:3000/tournaments/create";
-    const formData = new FormData();
-    if (name) formData.append("name", name);
-    if (startDate) formData.append("startDate", startDate);
-    if (endDate) formData.append("endDate", endDate);
-    if (location) formData.append("location", location);
-    if (format) formData.append("format", format);
-    if (type) formData.append("type", type);
-    if (numTeams) formData.append("numOfTeams", numTeams);
-    if (numGroups) formData.append("numOfGroups", numGroups);
-    if (numOfAdvanced) formData.append("numOfAdvanced", numOfAdvanced);
+    const endpoint = "http://localhost:3000/tournaments/create"
+    const formData = new FormData()
+    if (name) formData.append("name", name)
+    if (startDate) formData.append("startDate", startDate)
+    if (endDate) formData.append("endDate", endDate)
+    if (location) formData.append("location", location)
+    if (format) formData.append("format", format)
+    if (type) formData.append("type", type)
+    if (numTeams) formData.append("numOfTeams", numTeams)
+    if (numGroups) formData.append("numOfGroups", numGroups)
+    if (numOfAdvanced) formData.append("numOfAdvanced", numOfAdvanced)
     if (numOfPlayOffTeams)
-      formData.append("numOfPlayOffTeams", numOfPlayOffTeams);
-    formData.append("status", "upcoming");
-    if (logo) formData.append("logo", logo);
+      formData.append("numOfPlayOffTeams", numOfPlayOffTeams)
+    formData.append("status", "upcoming")
+    if (logo) formData.append("logo", logo)
 
     const options = {
       method: "POST",
       credentials: "include",
       body: formData,
-    } as RequestInit;
+    } as RequestInit
 
     try {
-      const response = await fetch(endpoint, options);
+      const response = await fetch(endpoint, options)
       if (response.ok) {
-        console.log("Tournament created successfully");
-        triggerToast("Tournament was created successfully", "success");
-        onSuccessfullCreate();
+        console.log("Tournament created successfully")
+        triggerToast("Tournament was created successfully", "success")
+        onSuccessfullCreate()
       } else {
-        const errorData = await response.json();
-        triggerToast("Failed to create tournament", "danger");
-        console.error("Failed to create tournament:", errorData.message);
+        const errorData = await response.json()
+        triggerToast("Failed to create tournament", "danger")
+        console.error("Failed to create tournament:", errorData.message)
       }
     } catch (error) {
-      console.error("Error while fetching:", error);
+      console.error("Error while fetching:", error)
     }
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit} className={styles.tournament_form_container}>
@@ -391,5 +384,5 @@ export const CreateTournamentModel: React.FC<TournamentFormProps> = ({
         Create Tournament
       </Button>
     </Form>
-  );
-};
+  )
+}

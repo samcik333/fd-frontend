@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react"
 import StatsCard from "./StatsCard"
 import { ScorerProps, TeamProps, TournamentProps } from "../../Match/Match.def"
 
-// Define a TypeScript interface for the team data
-
 interface Stat {
   name: string
   team: string
   value: number
 }
 
-// TODO STATS SPRAVIT
 const Stats: React.FC<{
   tournamentId: string
 }> = ({ tournamentId }) => {

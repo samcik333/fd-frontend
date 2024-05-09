@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import styles from "./auth.module.css";
-import { useUser } from "../../UserContext";
-import { useToast } from "../../ToastContext";
+import React, { useState } from "react"
+import { Button, Form, FormControl } from "react-bootstrap"
+import styles from "./auth.module.css"
+import { useUser } from "../../UserContext"
+import { useToast } from "../../ToastContext"
 
 type RegisterFormProps = {
-  onSuccessfulRegister: () => void;
-};
+  onSuccessfulRegister: () => void
+}
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({
   onSuccessfulRegister,
 }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [secondName, setSecondName] = useState("");
-  const { loginUser } = useUser();
-  const { triggerToast } = useToast();
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [secondName, setSecondName] = useState("")
+  const { loginUser } = useUser()
+  const { triggerToast } = useToast()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const endpoint = "http://localhost:3000/register";
+    event.preventDefault()
+    const endpoint = "http://localhost:3000/register"
 
-    // Configuring the fetch request
+
     const options = {
       method: "POST",
       headers: {
@@ -35,35 +35,35 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         password,
         firstName,
         secondName,
-      }), // Convert the state to JSON and send it as the POST body
-    };
-    const response = await fetch(endpoint, options);
+      }),
+    }
+    const response = await fetch(endpoint, options)
 
     if (response.ok) {
-      onSuccessfulRegister();
-      await getUser();
-      triggerToast("You have been successfully registered", "success");
+      onSuccessfulRegister()
+      await getUser()
+      triggerToast("You have been successfully registered", "success")
     } else {
-      console.error("Registration failed");
-      triggerToast("Registration failed", "danger");
+      console.error("Registration failed")
+      triggerToast("Registration failed", "danger")
     }
-  };
+  }
 
   const getUser = async () => {
     try {
       const response = await fetch("http://localhost:3000/me", {
         credentials: "include",
-      });
+      })
       if (response.ok) {
-        const data = await response.json();
-        loginUser(data);
+        const data = await response.json()
+        loginUser(data)
       } else {
-        throw new Error("Network response was not ok.");
+        throw new Error("Network response was not ok.")
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching user data:", error)
     }
-  };
+  }
 
   return (
     <div>
@@ -122,5 +122,5 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         </Button>
       </Form>
     </div>
-  );
-};
+  )
+}

@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { MatchEventType } from "./MatchOrganizer.def";
-import { Button, Modal } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { CaretRightFill } from "react-bootstrap-icons";
-import { faFutbol } from "@fortawesome/free-regular-svg-icons";
-import { useParams } from "react-router-dom";
-import { MatchEventProps, MatchProps, TeamProps } from "../Match/Match.def";
-import { AddStatModal } from "./AddStatModal";
+import React, { useEffect, useState } from "react"
+import { MatchEventType } from "./MatchOrganizer.def"
+import { Button, Modal } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { CaretRightFill } from "react-bootstrap-icons"
+import { faFutbol } from "@fortawesome/free-regular-svg-icons"
+import { useParams } from "react-router-dom"
+import { MatchEventProps, MatchProps, TeamProps } from "../Match/Match.def"
+import { AddStatModal } from "./AddStatModal"
 
 export type StatModal = {
-  open: boolean;
-  team?: TeamProps;
-  events: MatchEventProps[];
-  type?: MatchEventType;
-};
+  open: boolean
+  team?: TeamProps
+  events: MatchEventProps[]
+  type?: MatchEventType
+}
 
 interface ButtonsState {
-  startfirstHalfButton: boolean;
-  stopfirstHalfButton: boolean;
-  startSecondHalfButton: boolean;
-  stopSecondHalfButton: boolean;
-  matchStateButtons: boolean;
-  startFirstExtraHalf: boolean;
-  stopFirstExtraHalf: boolean;
-  startSecondExtraHalf: boolean;
-  stopSecondExtraHalf: boolean;
-  stopPenalty: boolean;
-  penaltyMiss: boolean;
-  penaltyGoal: boolean;
+  startfirstHalfButton: boolean
+  stopfirstHalfButton: boolean
+  startSecondHalfButton: boolean
+  stopSecondHalfButton: boolean
+  matchStateButtons: boolean
+  startFirstExtraHalf: boolean
+  stopFirstExtraHalf: boolean
+  startSecondExtraHalf: boolean
+  stopSecondExtraHalf: boolean
+  stopPenalty: boolean
+  penaltyMiss: boolean
+  penaltyGoal: boolean
 }
 
 const MatchOrganizerDetailCards: React.FC<{
-  matchData: MatchProps;
-  setMatchData: React.Dispatch<React.SetStateAction<MatchProps | undefined>>;
+  matchData: MatchProps
+  setMatchData: React.Dispatch<React.SetStateAction<MatchProps | undefined>>
 }> = ({ matchData, setMatchData }) => {
-  const { id } = useParams();
+  const { id } = useParams()
 
   const allButtonsDisabled: ButtonsState = {
     startfirstHalfButton: false,
@@ -49,7 +49,7 @@ const MatchOrganizerDetailCards: React.FC<{
     stopPenalty: false,
     penaltyMiss: false,
     penaltyGoal: false,
-  };
+  }
 
   const [buttonsState, setButtonsState] = useState<ButtonsState>({
     startfirstHalfButton: false,
@@ -64,19 +64,19 @@ const MatchOrganizerDetailCards: React.FC<{
     stopPenalty: false,
     penaltyMiss: false,
     penaltyGoal: false,
-  });
+  })
 
   const [statModal, setStatModal] = useState<StatModal>({
     open: false,
     team: undefined,
     type: undefined,
     events: [],
-  });
+  })
 
   const MatchStatsButton: React.FC<{
-    children: any;
-    style: any;
-    onClick?: (event: any) => void;
+    children: any
+    style: any
+    onClick?: (event: any) => void
   }> = ({ children, style, onClick }) => {
     return (
       <Button
@@ -85,8 +85,8 @@ const MatchOrganizerDetailCards: React.FC<{
         children={children}
         onClick={onClick}
       ></Button>
-    );
-  };
+    )
+  }
 
   const addEvent = async (
     event: React.BaseSyntheticEvent,
@@ -95,9 +95,9 @@ const MatchOrganizerDetailCards: React.FC<{
     assistId: number | undefined = undefined,
     teamId: number | undefined = undefined,
   ) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    let newEvent = undefined;
+    let newEvent = undefined
 
     switch (matchType) {
       case "startFirstHalf":
@@ -112,8 +112,8 @@ const MatchOrganizerDetailCards: React.FC<{
         newEvent = {
           matchId: Number(id),
           type: matchType,
-        };
-        break;
+        }
+        break
 
       case "goal":
       case "penaltyMiss":
@@ -124,8 +124,8 @@ const MatchOrganizerDetailCards: React.FC<{
           playerId: playerId,
           assistId: assistId,
           teamId: teamId,
-        };
-        break;
+        }
+        break
 
       case "shotOnGoal":
       case "shot":
@@ -136,8 +136,8 @@ const MatchOrganizerDetailCards: React.FC<{
           matchId: Number(id),
           type: matchType,
           teamId: teamId,
-        };
-        break;
+        }
+        break
 
       case "yellowCard":
       case "redCard":
@@ -146,83 +146,82 @@ const MatchOrganizerDetailCards: React.FC<{
           type: matchType,
           playerId: playerId,
           teamId: teamId,
-        };
-        break;
+        }
+        break
     }
 
-    const endpoint = "http://localhost:3000/matchTypes";
+    const endpoint = "http://localhost:3000/matchTypes"
 
-    // Configuring the fetch request
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(newEvent), // Convert the state to JSON and send it as the POST body
-    } as RequestInit;
-    const response = await fetch(endpoint, options);
+      body: JSON.stringify(newEvent),
+    } as RequestInit
+    const response = await fetch(endpoint, options)
 
     if (response.ok) {
-      const data = await response.json();
-      setMatchData(data);
-      console.log("Event added successfully");
+      const data = await response.json()
+      setMatchData(data)
+      console.log("Event added successfully")
     } else {
-      console.error("Failed to add event");
+      console.error("Failed to add event")
     }
-  };
+  }
 
   useEffect(() => {
     switch (matchData.status) {
       case "upcoming":
-        setButtonsState({ ...allButtonsDisabled, startfirstHalfButton: true });
-        break;
+        setButtonsState({ ...allButtonsDisabled, startfirstHalfButton: true })
+        break
       case "finished":
-        setButtonsState(allButtonsDisabled);
-        break;
+        setButtonsState(allButtonsDisabled)
+        break
       case "firstHalf":
         setButtonsState({
           ...allButtonsDisabled,
           stopfirstHalfButton: true,
           matchStateButtons: true,
-        });
-        break;
+        })
+        break
       case "halfTime":
-        setButtonsState({ ...allButtonsDisabled, startSecondHalfButton: true });
-        break;
+        setButtonsState({ ...allButtonsDisabled, startSecondHalfButton: true })
+        break
       case "secondHalf":
         setButtonsState({
           ...allButtonsDisabled,
           stopSecondHalfButton: true,
           matchStateButtons: true,
-        });
-        break;
+        })
+        break
       case "overTime":
         setButtonsState({
           ...allButtonsDisabled,
           startFirstExtraHalf: true,
-        });
-        break;
+        })
+        break
       case "firstExtraHalf":
         setButtonsState({
           ...allButtonsDisabled,
           stopFirstExtraHalf: true,
           matchStateButtons: true,
-        });
-        break;
+        })
+        break
       case "halfExtraTime":
         setButtonsState({
           ...allButtonsDisabled,
           startSecondExtraHalf: true,
-        });
-        break;
+        })
+        break
       case "secondExtraHalf":
         setButtonsState({
           ...allButtonsDisabled,
           stopSecondExtraHalf: true,
           matchStateButtons: true,
-        });
-        break;
+        })
+        break
       case "penalty":
         setButtonsState({
           ...allButtonsDisabled,
@@ -230,10 +229,10 @@ const MatchOrganizerDetailCards: React.FC<{
           penaltyGoal: true,
           penaltyMiss: true,
           matchStateButtons: true,
-        });
-        break;
+        })
+        break
     }
-  }, [matchData.events]);
+  }, [matchData.events])
 
   const handleStatModalOpen = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -245,12 +244,12 @@ const MatchOrganizerDetailCards: React.FC<{
       team: players,
       type: type,
       events: matchData.events,
-    });
-  };
+    })
+  }
 
   const handleStatModalClose = () => {
-    setStatModal({ open: false, events: [] });
-  };
+    setStatModal({ open: false, events: [] })
+  }
 
   return (
     <>
@@ -676,8 +675,8 @@ const MatchOrganizerDetailCards: React.FC<{
                 Penalty Goal <FontAwesomeIcon icon={faFutbol} />
               </MatchStatsButton>
               <MatchStatsButton
-                style={{ width: "300px", height: "200px", backgroundColor: "red"}}
-                  onClick={(event) =>
+                style={{ width: "300px", height: "200px", backgroundColor: "red" }}
+                onClick={(event) =>
                   handleStatModalOpen(event, matchData.firstTeam, "penaltyMiss")
                 }
               >
@@ -711,7 +710,7 @@ const MatchOrganizerDetailCards: React.FC<{
                 Penalty Goal <FontAwesomeIcon icon={faFutbol} />
               </MatchStatsButton>
               <MatchStatsButton
-                style={{ width: "300px", height: "200px", backgroundColor: "red"}}
+                style={{ width: "300px", height: "200px", backgroundColor: "red" }}
                 onClick={(event) =>
                   handleStatModalOpen(event, matchData.secondTeam, "penaltyMiss")
                 }
@@ -737,7 +736,7 @@ const MatchOrganizerDetailCards: React.FC<{
         <Modal.Footer></Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default MatchOrganizerDetailCards;
+export default MatchOrganizerDetailCards

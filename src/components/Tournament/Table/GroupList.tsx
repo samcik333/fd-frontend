@@ -6,7 +6,7 @@ import {
   StandingProps,
   TournamentProps,
 } from "../../Match/Match.def"
-import GroupTable from "./GroupTable" // Renders a table for a single group
+import GroupTable from "./GroupTable"
 import MatchCard from "../../Match/MatchCard"
 import matchCss from "../../Match/Matches.module.css"
 
@@ -17,7 +17,7 @@ const GroupList: React.FC<{ tournament: TournamentProps | undefined }> = ({
     Record<string, StandingProps[]>
   >({})
   const [tournamentMatches, setTournamentMatches] = useState<MatchProps[]>([])
-  const [currentRoundIndex, setCurrentRoundIndex] = useState(0) // Presumed round names
+  const [currentRoundIndex, setCurrentRoundIndex] = useState(0)
 
   const calculateRounds = (numOfTeams: number, numOfGroups: number) => {
     let roundsPerGroup = 0
@@ -26,7 +26,6 @@ const GroupList: React.FC<{ tournament: TournamentProps | undefined }> = ({
     } else {
       roundsPerGroup = numOfTeams / numOfGroups - 1
     }
-    // Each team plays each other once
     const totalRounds = roundsPerGroup
     return Array.from({ length: totalRounds }, (_, i) => `${i + 1}.Round`)
   }
@@ -34,7 +33,7 @@ const GroupList: React.FC<{ tournament: TournamentProps | undefined }> = ({
   const [rounds, setRounds] = useState<string[]>([])
 
   useEffect(() => {
-    // Update rounds when tournament details change
+
     if (tournament && tournament.numOfTeams && tournament.numOfGroups) {
       setRounds(calculateRounds(tournament.numOfTeams, tournament.numOfGroups))
     }
@@ -52,7 +51,7 @@ const GroupList: React.FC<{ tournament: TournamentProps | undefined }> = ({
           const data: StandingProps[] = await response.json()
           const groups = data.reduce(
             (acc: Record<string, StandingProps[]>, standing: StandingProps) => {
-              const group = standing.group || "Ungrouped" // Fallback for undefined group
+              const group = standing.group || "Ungrouped"
               acc[group] = acc[group] || []
               acc[group].push(standing)
               return acc
@@ -92,7 +91,7 @@ const GroupList: React.FC<{ tournament: TournamentProps | undefined }> = ({
       }
     }
     if (rounds.length > 0) {
-      // Ensure there are rounds to fetch
+
       fetchStandings()
       fetchMatches()
     }

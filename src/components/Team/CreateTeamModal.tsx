@@ -1,54 +1,53 @@
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useUser } from "../../UserContext";
-import { useToast } from "../../ToastContext";
+import React, { useState } from "react"
+import { Button, Form } from "react-bootstrap"
+import { useUser } from "../../UserContext"
+import { useToast } from "../../ToastContext"
 
-// Define prop types for LoginForm
 type TournamentFormProps = {
-  onSuccessfullCreate: () => void;
-};
+  onSuccessfullCreate: () => void
+}
 
 export const CreateTeamModal: React.FC<TournamentFormProps> = ({
   onSuccessfullCreate,
 }) => {
-  const [name, setName] = useState("");
-  const [file, setFile] = useState(null);
-  const { triggerToast } = useToast();
+  const [name, setName] = useState("")
+  const [file, setFile] = useState(null)
+  const { triggerToast } = useToast()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent the default form submission
-    await createTeam(); // Call your function to handle the API request
-    onSuccessfullCreate(); // Assuming you want to call this after successful creation
-  };
+    event.preventDefault()
+    await createTeam()
+    onSuccessfullCreate()
+  }
 
   const createTeam = async () => {
-    const endpoint = "http://localhost:3000/teams";
+    const endpoint = "http://localhost:3000/teams"
     try {
-      const formData = new FormData();
-      formData.append("name", name); // Append name
+      const formData = new FormData()
+      formData.append("name", name)
       if (file) {
-        formData.append("image", file); // Append image with 'image' key
+        formData.append("image", file)
       }
 
       const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
         credentials: "include",
-      });
+      })
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("Team created successfully:", data);
-        triggerToast("Team created successfully", "success");
+        const data = await response.json()
+        console.log("Team created successfully:", data)
+        triggerToast("Team created successfully", "success")
       } else {
-        console.error("Failed to create team:", response.statusText);
-        triggerToast("Failed to create team", "error");
+        console.error("Failed to create team:", response.statusText)
+        triggerToast("Failed to create team", "error")
       }
     } catch (error) {
-      console.error("Error creating team:", error);
-      triggerToast("Error creating team", "error");
+      console.error("Error creating team:", error)
+      triggerToast("Error creating team", "error")
     }
-  };
+  }
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
@@ -74,5 +73,5 @@ export const CreateTeamModal: React.FC<TournamentFormProps> = ({
         Create Team
       </Button>
     </Form>
-  );
-};
+  )
+}

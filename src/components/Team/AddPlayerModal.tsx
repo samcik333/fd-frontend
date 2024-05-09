@@ -1,33 +1,32 @@
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShirt } from "@fortawesome/free-solid-svg-icons";
-import { useToast } from "../../ToastContext";
+import React, { useState } from "react"
+import { Button, Form } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faShirt } from "@fortawesome/free-solid-svg-icons"
+import { useToast } from "../../ToastContext"
 
-// Define prop types for LoginForm
 type PlayerFormProps = {
-  onSuccessfullCreate: () => void;
-  id: any;
-};
+  onSuccessfullCreate: () => void
+  id: any
+}
 
 export const AddPlayerModal: React.FC<PlayerFormProps> = ({
   onSuccessfullCreate,
   id,
 }) => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [age, setAge] = useState(5);
-  const [number, setNumber] = useState(1);
-  const { triggerToast } = useToast();
+  const [name, setName] = useState("")
+  const [surname, setSurname] = useState("")
+  const [age, setAge] = useState(5)
+  const [number, setNumber] = useState(1)
+  const { triggerToast } = useToast()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent the default form submission
-    await addPlayer(); // Call your function to handle the API request
-    onSuccessfullCreate(); // Assuming you want to call this after successful creation
-  };
+    event.preventDefault()
+    await addPlayer()
+    onSuccessfullCreate()
+  }
 
   const addPlayer = async () => {
-    const endpoint = `http://localhost:3000/teams/${id}/players`;
+    const endpoint = `http://localhost:3000/teams/${id}/players`
     const options = {
       method: "POST",
       headers: {
@@ -40,22 +39,22 @@ export const AddPlayerModal: React.FC<PlayerFormProps> = ({
         age: age,
         number: number,
       }),
-    } as RequestInit;
+    } as RequestInit
     try {
-      const response = await fetch(endpoint, options);
+      const response = await fetch(endpoint, options)
       if (response.ok) {
-        triggerToast("Player added successfully", "success");
-        onSuccessfullCreate();
+        triggerToast("Player added successfully", "success")
+        onSuccessfullCreate()
       } else {
-        const errorData = await response.json();
-        triggerToast("Failed to add player", "danger");
-        console.error("Failed to add player:", errorData.message);
+        const errorData = await response.json()
+        triggerToast("Failed to add player", "danger")
+        console.error("Failed to add player:", errorData.message)
       }
     } catch (error) {
-      console.error("Error while fetching:", error);
+      console.error("Error while fetching:", error)
     }
-    console.log("succesfuly created");
-  };
+    console.log("succesfuly created")
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -107,5 +106,5 @@ export const AddPlayerModal: React.FC<PlayerFormProps> = ({
         Add player
       </Button>
     </Form>
-  );
-};
+  )
+}
